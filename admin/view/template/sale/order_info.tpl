@@ -307,6 +307,7 @@
                     <tr>
                         <td class="left" width="120"><?php echo $column_image; ?></td>
                         <td class="left"><?php echo $column_product; ?></td>
+                        <td class="left"><?php echo $column_size; ?></td>
                         <td class="left"><?php echo $column_model; ?></td>
                         <td class="right"><?php echo $column_quantity; ?></td>
                         <td class="right"><?php echo $column_price; ?></td>
@@ -317,16 +318,18 @@
                     <?php foreach ($products as $product) { ?>
                     <tr>
                         <td><img src="<?php echo $product['image']; ?>"/></td>
-                        <td class="left"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+                        <td class="left"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></td>
+                        <td class="left">
                             <?php foreach ($product['option'] as $option) { ?>
                             <br/>
                             <?php if ($option['type'] != 'file') { ?>
                             &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
                             <?php } else { ?>
                             &nbsp;<small> - <?php echo $option['name']; ?>: <a
-                                    href="<?php echo $option['href']; ?>"><?php echo $option['value']; ?></a></small>
+                                href="<?php echo $option['href']; ?>"><?php echo $option['value']; ?></a></small>
                             <?php } ?>
-                            <?php } ?></td>
+                            <?php } ?>
+                        </td>
                         <td class="left"><?php echo $product['model']; ?></td>
                         <td class="right"><?php echo $product['quantity']; ?></td>
                         <td class="right"><?php echo $product['price']; ?></td>
@@ -347,7 +350,7 @@
                     <?php foreach ($totals as $totals) { ?>
                     <tbody id="totals">
                     <tr>
-                        <td colspan="5" class="right"><?php echo $totals['title']; ?>:</td>
+                        <td colspan="6" class="right"><?php echo $totals['title']; ?>:</td>
                         <td class="right"><?php echo $totals['text']; ?></td>
                     </tr>
                     </tbody>

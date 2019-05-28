@@ -530,7 +530,8 @@ class ModelSaleOrder extends Model {
 	
 	public function getOrderProducts($order_id) {
 		//$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product a left join " . DB_PREFIX . "product b on a.product_id = b.product_id WHERE a.order_id = '" . (int)$order_id . "'");
+        $query = $this->db->query("SELECT a.*, b.image FROM " . DB_PREFIX . "order_product a LEFT join " . DB_PREFIX . "product b on a.product_id = b.product_id WHERE a.order_id = '" . (int)$order_id . "'");
+
 		return $query->rows;
 	}
 	
@@ -541,10 +542,10 @@ class ModelSaleOrder extends Model {
 	}
 	
 	public function getOrderOptions($order_id, $order_product_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product a left join " . DB_PREFIX . "product b on a.product_id = b.product_id WHERE a.order_id = '" . (int)$order_product_id . "'");
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$order_product_id . "'");
 
-		return $query->rows;
-	}
+        return $query->rows;
+    }
 
 	public function getOrderDownloads($order_id, $order_product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_download WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$order_product_id . "'");

@@ -124,6 +124,7 @@ $_['column_date_modified']                    = 'Date Modified';
 $_['column_total']                            = 'Total';
 $_['column_image']                            = 'Image';
 $_['column_product']                          = 'Product';
+$_['column_size']                            = 'Size';
 $_['column_model']                            = 'Model';
 $_['column_quantity']                         = 'Quantity';
 $_['column_price']                            = 'Unit Price';

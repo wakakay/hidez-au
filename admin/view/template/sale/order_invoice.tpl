@@ -107,6 +107,7 @@
         <tr class="heading">
             <td class="left" width="120"><b><?php echo $column_image; ?></b></td>
             <td><b><?php echo $column_product; ?></b></td>
+            <td><b><?php echo $column_size; ?></b></td>
             <td><b><?php echo $column_model; ?></b></td>
             <td align="right"><b><?php echo $column_quantity; ?></b></td>
             <td align="right"><b><?php echo $column_price; ?></b></td>
@@ -115,11 +116,13 @@
         <?php foreach ($order['product'] as $product) { ?>
         <tr>
             <td><img src="<?php echo $product['image']; ?>"/></td>
-            <td><?php echo $product['name']; ?>
+            <td><?php echo $product['name']; ?></td>
+            <td>
                 <?php foreach ($product['option'] as $option) { ?>
                 <br/>
                 &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
-                <?php } ?></td>
+                <?php } ?>
+            </td>
             <td><?php echo $product['model']; ?></td>
             <td align="right"><?php echo $product['quantity']; ?></td>
             <td align="right"><?php echo $product['price']; ?></td>
@@ -137,7 +140,7 @@
         <?php } ?>
         <?php foreach ($order['total'] as $total) { ?>
         <tr>
-            <td align="right" colspan="5"><b><?php echo $total['title']; ?>:</b></td>
+            <td align="right" colspan="6"><b><?php echo $total['title']; ?>:</b></td>
             <td align="right"><?php echo $total['text']; ?></td>
         </tr>
         <?php } ?>
