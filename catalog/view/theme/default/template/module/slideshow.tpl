@@ -19,7 +19,11 @@
 <div class="fackbook-box">
 	<h1>HIDEZ WORLD NEWS</h1>
     <div class="ui-active-box">
-        <a href="?route=product/product&path=106_107&product_id=446" title="EQUINE COMPRESSION HOOD WITH EARS FUCHSIA" target="_blank"></a>
+        <a href="?route=product/product&path=68_59&product_id=79" title="EQUINE TRAVEL & RECOVERY SUIT BLACK" target="_blank"></a>
+        <a href="?route=product/product&path=68_59&product_id=255" title="EQUINE TRAVEL & RECOVERY SUIT BLUE" target="_blank"></a>
+        <a href="?route=product/product&path=71_80&product_id=244" title="EQUINE COMPRESSION SOCK BLACK" target="_blank"></a>
+        <a href="?route=product/product&path=72_83&product_id=249" title="EQUINE ICE COMPRESSION SOCK BLUE" target="_blank"></a>
+        <!--<a href="?route=product/product&path=106_107&product_id=446" title="EQUINE COMPRESSION HOOD WITH EARS FUCHSIA" target="_blank"></a>
 
         <a href="?route=product/product&path=106_107&product_id=445" title="EQUINE COMPRESSION HOOD WITH EARS BLACK" target="_blank"></a>
         <a href="?route=product/product&path=106_107&product_id=445" title="EQUINE COMPRESSION HOOD WITH EARS BLACK" target="_blank"></a>
@@ -31,7 +35,7 @@
         <a href="?route=product/product&path=70_64&product_id=251" title="RACING GREYHOUND SUIT BLUE" target="_blank"></a>
 
         <a href="?route=product/product&path=106_107&product_id=445" title="EQUINE COMPRESSION HOOD WITH EARS BLACK" target="_blank"></a>
-        <a href="?route=product/product&path=106_107&product_id=446" title="EQUINE COMPRESSION HOOD WITH EARS FUCHSIA" target="_blank"></a>
+        <a href="?route=product/product&path=106_107&product_id=446" title="EQUINE COMPRESSION HOOD WITH EARS FUCHSIA" target="_blank"></a>-->
     </div>
     <!--<div class="ui-introduct">
     	<h3>About Hidez International Australia</h3>
