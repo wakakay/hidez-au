@@ -1,9 +1,9 @@
 <?php
-$to = '649865915@qq.com'; //'sales@hidez.com.au';
+$to = 'sales@hidez.com.au';
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "hidez";
+$username = "hidezcom_atomwakakay";
+$password = "STAR.electrical5";
+$dbname = "hidezcom_shop";
 
 // 创建连接
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -100,25 +100,19 @@ if($_POST['saveForm']=='Submit' and $_POST['Email']){
 	$headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
 	$headers .= "To: Hidez <".$to.">" . "\r\n";;
 	$headers .= "From: ".$_POST[FirstName]." <".$_POST[Email].">" ."\r\n";
-	//mail($to, $subject, $message, $headers);
-	$returnMsg=mail($to, $subject, $message, $headers)?'success':'failure';
+	
 
-    $sql = "INSERT INTO `oc_sponsorship_application` (`FirstName`, `LastName`, `Gender`, `Age`, `StreetAddress`, `AddressLine`, `City`, `State`, `Postal`, `Country`, `Nat`, `Email`, `Phone`, `Field`, `Achievements`, `provide`, `Competition`, `ranking`, `activity`, `website`, `links`, `sponsors`, `products`, `comments`, `date_added`) VALUES (". $_POST[FirstName] .", ". _POST[LastName] .", ". _POST[Gender] .", ". _POST[Age] .", ". _POST[StreetAddress] .", ". _POST[AddressLine] .", ". _POST[City] .", ". _POST[State] .", ". _POST[Postal] .", ". _POST[Country] .", ". _POST[Nat] .", ". _POST[Email] .", ". _POST[Phone] .", ". _POST[Field] .", ". _POST[Achievements] .", ". _POST[provide] .", ". _POST[Competition] .", ". _POST[ranking] .", ". _POST[activity] .", ". _POST[website] .", ". _POST[links] .", ". _POST[sponsors] .", ". _POST[products] .", ". _POST[comments] .", ". NOW() . ")";
+     $sql = "INSERT INTO `oc_sponsorship_application` (`FirstName`, `LastName`, `Gender`, `Age`, `StreetAddress`, `AddressLine`, `City`, `State`, `Postal`, `Country`, `Nat`, `Email`, `Phone`, `Field`, `Achievements`, `provide`, `Competition`, `ranking`, `activity`, `website`, `links`, `sponsors`, `products`, `comments`, `date_added`) VALUES ('". $_POST[FirstName]."', '".$_POST[LastName] ."', '".$_POST[Gender] ."', '".$_POST[Age] ."', '".$_POST[StreetAddress] ."', '".$_POST[AddressLine] ."', '".$_POST[City] ."', '".$_POST[State] ."', '".$_POST[Postal] ."', '".$_POST[Country] ."', '".$_POST[Nat] ."', '".$_POST[Email] ."', '".$_POST[Phone] ."', '".$_POST[Field] ."', '".$_POST[Achievements] ."', '".$_POST[provide] ."', '".$_POST[Competition] ."', '".$_POST[ranking] ."', '".$_POST[activity] ."', '".$_POST[website] ."', '".$_POST[links] ."', '".$_POST[sponsors] ."', '".$_POST[products] ."', '".$_POST[comments] ."', ". time() . ")";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "新记录插入成功";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
+    $conn->query($sql);
     $conn->close();
+
+	$returnMsg=mail($to, $subject, $message, $headers) ? 'success' : 'failure';
 
 	$returnUrl=$_POST['mod']=='1'?'index.php?route=information/information&information_id=30':'index.php?route=information/information&information_id=31';
 	Return_Msg($returnMsg,$returnUrl,2);
 }else{
 	$returnMsg='failure';
-    $conn->close();
-
 	$returnUrl=$_POST['mod']=='1'?'index.php?route=information/information&information_id=30':'index.php?route=information/information&information_id=31';
 	Return_Msg($returnMsg,$returnUrl,2);
 }
