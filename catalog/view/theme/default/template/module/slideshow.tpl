@@ -19,23 +19,26 @@
 <div class="fackbook-box">
 	<h1>HIDEZ WORLD NEWS</h1>
     <div class="ui-active-box">
-        <a href="?route=product/product&path=68_59&product_id=79" title="EQUINE TRAVEL & RECOVERY SUIT BLACK" target="_blank"></a>
-        <a href="?route=product/product&path=68_59&product_id=255" title="EQUINE TRAVEL & RECOVERY SUIT BLUE" target="_blank"></a>
-        <a href="?route=product/product&path=71_80&product_id=244" title="EQUINE COMPRESSION SOCK BLACK" target="_blank"></a>
-        <a href="?route=product/product&path=72_83&product_id=249" title="EQUINE ICE COMPRESSION SOCK BLUE" target="_blank"></a>
-        <!--<a href="?route=product/product&path=106_107&product_id=446" title="EQUINE COMPRESSION HOOD WITH EARS FUCHSIA" target="_blank"></a>
+        <a href="?route=product/product&path=106_107&product_id=446" title="FUCHSIA HOOD WITH EARS" target="_blank"></a>
+        <a href="?route=product/product&path=98_100&product_id=364" title="BW DREAM CATCHER" target="_blank"></a>
+        <a href="?route=product/product&path=98_100&product_id=439" title="FLORAL MANDELA" target="_blank"></a>
+        <a href="?route=product/product&path=106_107&product_id=448" title="BLUE HOOD WITH EARSMORE IMAGES
+" target="_blank"></a>
 
-        <a href="?route=product/product&path=106_107&product_id=445" title="EQUINE COMPRESSION HOOD WITH EARS BLACK" target="_blank"></a>
-        <a href="?route=product/product&path=106_107&product_id=445" title="EQUINE COMPRESSION HOOD WITH EARS BLACK" target="_blank"></a>
+        <a href="?route=product/product&path=98_99&product_id=334" title="EQUINE COMPRESSION HOOD GREY" target="_blank"></a>
+        <a href="?route=product/product&path=98_100&product_id=439" title="FLORAL MANDELA" target="_blank"></a>
+        <a href="?route=product/product&path=98_99&product_id=332" title="EQUINE COMPRESSION HOOD BLACK" target="_blank"></a>
+        <a href="?route=product/product&path=98_99&product_id=333" title="EQUINE COMPRESSION HOOD BLUE" target="_blank"></a>
 
-        <a href="?route=product/product&path=71_80&product_id=246" title="EQUINE COMPRESSION SOCK RED" target="_blank"></a>
-        <a href="?route=product/product&path=71_80&product_id=245" title="EQUINE COMPRESSION SOCK BLUE" target="_blank"></a>
+        <a href="?route=product/product&path=98_100&product_id=394" title="SACRED GEOMETRY" target="_blank"></a>
+        <a href="?route=product/product&path=98_99&product_id=334" title="EQUINE COMPRESSION HOOD GREY" target="_blank"></a>
+        <a href="?route=product/product&path=106_107&product_id=445" title="BLACK HOOD WITH EARS" target="_blank"></a>
+        <a href="?route=product/product&path=106_107&product_id=452" title="RED HOOD WITH EARS" target="_blank"></a>
 
-        <a href="?route=product/product&path=68_59&product_id=79" title="EQUINE TRAVEL & RECOVERY SUIT BLACK" target="_blank"></a>
-        <a href="?route=product/product&path=70_64&product_id=251" title="RACING GREYHOUND SUIT BLUE" target="_blank"></a>
-
-        <a href="?route=product/product&path=106_107&product_id=445" title="EQUINE COMPRESSION HOOD WITH EARS BLACK" target="_blank"></a>
-        <a href="?route=product/product&path=106_107&product_id=446" title="EQUINE COMPRESSION HOOD WITH EARS FUCHSIA" target="_blank"></a>-->
+        <a href="?route=product/product&path=98_99&product_id=334" title="EQUINE COMPRESSION HOOD GREY" target="_blank"></a>
+        <a href="?route=product/product&path=98_99&product_id=338" title="EQUINE COMPRESSION HOOD PURPLE" target="_blank"></a>
+        <a href="?route=product/product&path=106_107&product_id=446" title="FUCHSIA HOOD WITH EARS" target="_blank"></a>
+        <a href="?route=product/product&path=106_107&product_id=450" title="GREY HOOD WITH EARS" target="_blank"></a>
     </div>
     <!--<div class="ui-introduct">
     	<h3>About Hidez International Australia</h3>
