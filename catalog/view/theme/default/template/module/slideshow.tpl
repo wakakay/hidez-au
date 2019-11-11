@@ -1,4 +1,3 @@
-<script src="Scripts/swfobject_modified.js" type="text/javascript"></script>
 <div id="wrapper" style="width:<?php echo $width; ?>px;">
   <div id="slider-wrapper">
 
@@ -88,5 +87,4 @@ $(document).ready(function() {
 	var oAl = $('#slider<?php echo $module; ?> .nivo-controlNav a').length * $('#slider<?php echo $module; ?> .nivo-controlNav a').width()+3*$('#slider<?php echo $module; ?> .nivo-controlNav a').length;
 	oNivoW.css('left',(oSlideW-oAl)/2);
 });
-swfobject.registerObject("FlashID");
 </script>

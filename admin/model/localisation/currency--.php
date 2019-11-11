@@ -101,7 +101,6 @@ class ModelLocalisationCurrency extends Model {
 		}
 	}	
 
-/*
 	public function updateCurrencies($force = false) {
 		if (extension_loaded('curl')) {
 			$data = array();
@@ -113,10 +112,19 @@ class ModelLocalisationCurrency extends Model {
 			}
 			
 			foreach ($query->rows as $result) {
-				$data[] = $this->config->get('config_currency') . $result['code'] . '=X';
+				// $data[] = $this->config->get('config_currency') . $result['code'] . '=X';
+				$api = 'http://tools.2345.com/frame/sundry/getHuilv?from=' . $this->config->get('config_currency') . '&to=' . $result['code'] .'&total=1';
+				$curl2 = curl_init();
+
+                curl_setopt($curl2, CURLOPT_URL, $api);
+                curl_setopt($curl2, CURLOPT_RETURNTRANSFER, 1);
+
+                $data[] = curl_exec($curl2);
+
+                curl_close($curl2);
 			}	
-			
-			$curl = curl_init();
+			print_r($data);
+			/*$curl = curl_init();
 			
 			curl_setopt($curl, CURLOPT_URL, 'http://download.finance.yahoo.com/d/quotes.csv?s=' . implode(',', $data) . '&f=sl1&e=.csv');
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -125,8 +133,9 @@ class ModelLocalisationCurrency extends Model {
 			
 			curl_close($curl);
 			
-			$lines = explode("\n", trim($content));
-				
+			$lines = explode("\n", trim($content));*/
+
+			print_r($content);
 			foreach ($lines as $line) {
 				$currency = utf8_substr($line, 4, 3);
 				$value = utf8_substr($line, 11, 6);
@@ -140,73 +149,6 @@ class ModelLocalisationCurrency extends Model {
 			
 			$this->cache->delete('currency');
 		}
-	}
-	*/
-
-
-	public function object_array($array) {  
-	    if(is_object($array)) {  
-	        $array = (array)$array;  
-	     } if(is_array($array)) {  
-	         foreach($array as $key=>$value) {  
-	             $array[$key] = object_array($value);  
-	             }  
-	     }  
-	     return $array;  
-	}
-
-
-	public function updateCurrencies($force = false) {
-
-			$curl = curl_init();
-			curl_setopt($curl, CURLOPT_URL, 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml');
-			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-			$xml = curl_exec($curl);
-			curl_close($curl);
-
-			$cube=array();
-
-			if (preg_match_all("/currency='(.*?)' rate='(.*?)'/i", $xml, $currencyCode)) {
-				if ($currencyCode) {
-					foreach ($currencyCode['1'] as $k => $v) {
-						$cube[$v]=$currencyCode['2'][$k];
-					}
-				}
-			}
-
-			/*
-			$xml=simplexml_load_file("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
-			$tempXml=$this->object_array($xml->Cube->Cube);
-
-			$cube=array();
-
-			if($tempXml['Cube']){
-				foreach ($tempXml['Cube'] as $k=> $v ) {
-					$cube[$v['@attributes']['currency']]=$v['@attributes']['rate'];
-				}
-			}
-			*/
-
-			$tempCurrency=$cube[$this->config->get('config_currency')];
-
-			if ($cube and $tempCurrency) {
-
-				foreach ($cube as $k=>$v) {
-					$currency = $k;
-					//$value = (float)($v/$tempCurrency);
-					$value = sprintf("%.5f",($v/$tempCurrency));
-					
-					if ((float)$value) {
-						$this->db->query("UPDATE " . DB_PREFIX . "currency SET value = '" . (float)$value . "', date_modified = '" .  $this->db->escape(date('Y-m-d H:i:s')) . "' WHERE code = '" . $this->db->escape($currency) . "'");
-					}
-				}
-				
-				$this->db->query("UPDATE " . DB_PREFIX . "currency SET value = '1.00000', date_modified = '" .  $this->db->escape(date('Y-m-d H:i:s')) . "' WHERE code = '" . $this->db->escape($this->config->get('config_currency')) . "'");
-				
-				$this->cache->delete('currency');
-
-			}
-
 	}
 	
 	public function getTotalCurrencies() {
