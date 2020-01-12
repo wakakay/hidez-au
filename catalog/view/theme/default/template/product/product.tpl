@@ -75,25 +75,25 @@
         
         <?php foreach ($options as $option) { ?>
             <?php if ($option['type'] == 'radio') { ?>
-            <div id="option-<?php echo $option['product_option_id']; ?>" class="option-item <?php echo $option['classname'];?>">
-                
+        <div id="option-<?php echo $option['product_option_id']; ?>" class="option-item <?php echo $option['classname'];?>">
+
               <h4>
               	<?php if ($option['required']) { ?><b class="required">*</b><?php } ?><?php echo $option['name']; ?>:
-                <?php if ($option['explainhref']) { ?><a href="<?php echo $option['explainhref']; ?>" target="_blank"><i></i><?php echo $option['explainname']; ?></a><?php } ?>
-              </h4>  
-              
+                <?php if ($option['explainhref']) { ?><a href="javascript:;" data-href="<?php echo $option['explainhref']; ?>"><i></i><?php echo $option['explainname']; ?></a><?php } ?>
+              </h4>
+
               <?php if(count($option['option_parents'])){ ?>
-              
+
                 <?php foreach ($option['option_parents'] as $v) {?>
                   <ul <?php echo "data-parent='".$v."'"; ?>>
-                  <?php foreach ($option['option_value'] as $key=>$option_value) { 
+                  <?php foreach ($option['option_value'] as $key=>$option_value) {
                     if($v == $option_value['option_parent']){
                   ?>
                     <li>
                       <label for="option-value-<?php echo $option_value['product_option_value_id']; ?>">
                         <input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>"/>
                         <span><?php echo $option_value['name']!="-"?$option_value['name']:""; ?></span>
-                        
+
                         <?php if ($option_value['price']){
                             if ($option_value['name']=="-"){
                               echo '<strong>'.$option_value['price'].'</strong>';
@@ -107,14 +107,14 @@
                   </ul>
                 <?php } ?>
               <?php }else{ ?>
-              	
+
                 <ul>
                 <?php foreach ($option['option_value'] as $key=>$option_value) {?>
                   <li>
                     <label for="option-value-<?php echo $option_value['product_option_value_id']; ?>">
                       <input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>"/>
                       <span><?php echo $option_value['name']!="-"?trim($option_value['name']):""; ?></span>
-                      
+
                       <?php if ($option_value['price']){
                           if ($option_value['name']=="-"){
                             echo '<strong>'.$option_value['price'].'</strong>';
@@ -126,12 +126,12 @@
                   </li>
                 <?php } ?>
                 </ul>
-                
+
               <?php } ?>
             </div>
             <?php } ?>
-            
-            
+
+
             <?php if ($option['type'] == 'textarea') { ?>
             <div id="option-<?php echo $option['product_option_id']; ?>" class="option-item <?php echo $option['classname'];?>">
               <h4 style="color:#f00;">
@@ -140,89 +140,101 @@
               <textarea name="option[<?php echo $option['product_option_id']; ?>]" cols="40" rows="2"><?php echo $option['option_value']; ?></textarea>
             </div>
             <?php } ?>
-            
-            
+
+
         <?php } ?>
         <script type="text/javascript" src="catalog/view/javascript/jquery/amplification/jquery.zoombie.js"></script>
         <script type="text/javascript">
-				$(document).ready(function() {
-					$('#images').zoombie(); //fang da
-					/*small pic*/
-					for (var i = 0; i < $('.image-additional a').length; i++) {
-						$('.image-additional a')[i].index = i + 1;
-						$('.image-additional a').click(function() {
-							for (var i = 0; i < $('.image-additional a').length; i++) {
-								$('.image-additional a img').attr("class", "");
-							}
-							$(this).find('img').attr("class", "redBor");
-							var small_img = $(this).find('img').attr('src');
-							var big_img = $('.product-info .image').find('img').attr('src', small_img);
-						})
-					}
-	
-					var $optionItem = $(".product-info .option-item"), $optionItemLi = $(".product-info .option-item li");
-					var $scope = $(".product-info .total-price .scope");
-					var $totalPrice = $(".product-info .total-price .money");
-					var defaultPriceArray = [];
-					
-					$totalPrice.each(function (index, item) {
-					    var number = item.innerHTML.replace(',', '');
-						defaultPriceArray.push(number);
-					});
-					
-					var $totalPrice = $(".product-info .total-price .money"),
-                        defaultPrice = parseFloat($totalPrice.html());
-					
-					
-					var addPrice = function(){
-						var reTotal = 0;
-						$optionItemLi.each(function(){
-								var $this = $(this);
-								if($this.hasClass("active") && $this.find("input").attr("checked") == "checked" && $this.find(".money").length>0){
-										
-										if($this.find(".prefix").html() == "-"){
-												reTotal -= parseFloat($this.find(".money").html());
-										}else if($this.find(".prefix").html() == "+"){
-												reTotal += parseFloat($this.find(".money").html());
-										}
-										
-								}
-						});
-						
-						$totalPrice.each(function (index, item) {
-							var number = Number(defaultPriceArray[index])+reTotal;
-							$totalPrice[index].innerHTML = number.toFixed(2)
-						});
-					}
-					
-					$optionItemLi.on("click", function(){
-						var $this = $(this);
-						if($scope.length>0){$scope.remove();}
-						$this.parents(".option-item").find("li").removeClass("active");
-						$this.addClass("active");
-						addPrice();
-						
-						var T = $.trim($this.find("span").text());
-						$optionItem.find("ul").each(function(){
-								if($(this).attr("data-parent") == T){
-										$(this).show().siblings("ul").hide();
-										$(this).parent(".option-item").find("li").removeClass("active");
-										$(this).parent(".option-item").find("input").attr("checked",false);
-										return false;
-								}
-						})
-					});
-					
-					// 马服类型默认选中最后一个
-					var productType = $(".product-info .option-item.product-type ul li");
-					if(productType.length){
-						productType.eq(productType.length-1).click().find("input").attr("checked",true);
-						addPrice();
-					}
-					
-					
-				});
-				</script> 
+          $(document).ready(function () {
+            $('#images').zoombie(); //fang da
+            /*small pic*/
+            for (var i = 0; i < $('.image-additional a').length; i++) {
+              $('.image-additional a')[i].index = i + 1;
+              $('.image-additional a').click(function () {
+                for (var i = 0; i < $('.image-additional a').length; i++) {
+                  $('.image-additional a img').attr("class", "");
+                }
+                $(this).find('img').attr("class", "redBor");
+                var small_img = $(this).find('img').attr('src');
+                var big_img = $('.product-info .image').find('img').attr('src', small_img);
+              })
+            }
+
+            var $optionItem = $(".product-info .option-item"), $optionItemLi = $(".product-info .option-item li");
+            var $scope = $(".product-info .total-price .scope");
+            var $totalPrice = $(".product-info .total-price .money");
+            var defaultPriceArray = [];
+
+            $totalPrice.each(function (index, item) {
+              var number = item.innerHTML.replace(',', '');
+              defaultPriceArray.push(number);
+            });
+
+            var $totalPrice = $(".product-info .total-price .money"),
+                    defaultPrice = parseFloat($totalPrice.html());
+            var addPrice = function () {
+              var reTotal = 0;
+              $optionItemLi.each(function () {
+                var $this = $(this);
+                if ($this.hasClass("active") && $this.find("input").attr("checked") == "checked" && $this.find(".money").length > 0) {
+
+                  if ($this.find(".prefix").html() == "-") {
+                    reTotal -= parseFloat($this.find(".money").html());
+                  } else if ($this.find(".prefix").html() == "+") {
+                    reTotal += parseFloat($this.find(".money").html());
+                  }
+
+                }
+              });
+
+              $totalPrice.each(function (index, item) {
+                var number = Number(defaultPriceArray[index]) + reTotal;
+                $totalPrice[index].innerHTML = number.toFixed(2)
+              });
+            }
+            var equineType = ''; // equine类型
+            $optionItemLi.on("click", function () {
+              var $this = $(this);
+              if ($scope.length > 0) {
+                $scope.remove();
+              }
+              var parents = $this.parents(".option-item")
+              parents.find("li").removeClass("active");
+              $this.addClass("active");
+              addPrice();
+
+              var T = $.trim($this.find("span").text());
+              $optionItem.find("ul").each(function () {
+                if($(this).attr("data-parent") === T){
+                  $(this).show().siblings("ul").hide();
+                  $(this).parent(".option-item").find("li").removeClass("active");
+                  $(this).parent(".option-item").find("input").attr("checked",false);
+                  return false;
+                }
+              })
+
+              if (parents[0].className.indexOf('product-type') !== -1) {
+                equineType = T.replace(/\s*/g, '').toLowerCase();
+              }
+            });
+
+            var linkItem = $(".product-info .option-item h4 a");
+            linkItem.on("click", function () {
+              if (!equineType) {
+                return
+              }
+              var url = $(this).attr('data-href') + '&equineType=' + equineType
+              window.open(url)
+            })
+
+            // 马服类型默认选中最后一个
+            var productType = $(".product-info .option-item.product-type ul li");
+            if (productType.length) {
+              productType.eq(productType.length - 1).click().find("input").attr("checked", true);
+              addPrice();
+            }
+          });
+        </script>
       </div>
       <?php } ?>
       <div class="clearboth"></div>
