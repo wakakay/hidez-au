@@ -1,7 +1,14 @@
 <?php echo $header; ?>
 <div id="content" class="product"> 
- <?php echo $content_top; ?><?php echo $column_left; ?><?php echo $column_right; ?>
- 
+  <?php echo $content_top; ?><?php echo $column_left; ?><?php echo $column_right; ?>
+  <script>
+  function getScroll() {
+   var top = $('#moduleTabs').offset().top - 100
+   $('body,html').animate({
+     scrollTop: top
+   }, 200);
+  }
+  </script>
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
@@ -9,7 +16,7 @@
     <span><a onclick="javascript:history.go(-1);return false;">back level</a></span>
   </div>
   
-  <h1><?php echo $heading_title; ?><a href="javascript:;" onClick="moreDet()">MORE IMAGES </a></h1>
+  <h1><?php echo $heading_title; ?><a href="javascript:;" onClick="getScroll()">MORE IMAGES </a></h1>
   
   <div class="product-info">
     <?php if ($thumb || $images) { ?>
@@ -41,7 +48,13 @@
         <?php if ($reward) { ?>
         <span><?php echo $text_reward; ?></span> <?php echo $reward; ?><br />
         <?php } ?>
-        <span><?php echo $text_stock; ?></span> <?php echo $stock; ?></div>
+        <span><?php echo $text_stock; ?></span> <?php echo $stock; ?>
+
+        <div class="share" flex="cross:center dir:right">
+          <div class="addthis_default_style"><a class="addthis_button_compact"><?php echo $text_share; ?></a> <a class="addthis_button_email"></a><a class="addthis_button_print"></a> <a class="addthis_button_facebook"></a> <a class="addthis_button_twitter"></a></div>
+          <script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js"></script>
+        </div>
+      </div>
       <?php if ($price) { ?>
       <div class="price">
         <div class="total-price"><span><?php echo $text_price; ?></span>
@@ -74,46 +87,25 @@
         <h2><?php echo $text_option; ?></h2>
         
         <?php foreach ($options as $option) { ?>
-            <?php if ($option['type'] == 'radio') { ?>
-        <div id="option-<?php echo $option['product_option_id']; ?>" class="option-item <?php echo $option['classname'];?>">
+          <?php if ($option['type'] == 'radio') { ?>
+          <div id="option-<?php echo $option['product_option_id']; ?>" class="option-item <?php echo $option['classname'];?>">
 
-              <h4>
-              	<?php if ($option['required']) { ?><b class="required">*</b><?php } ?><?php echo $option['name']; ?>:
-                <?php if ($option['explainhref']) { ?><a href="javascript:;" data-href="<?php echo $option['explainhref']; ?>"><i></i><?php echo $option['explainname']; ?></a><?php } ?>
-              </h4>
+            <h4>
+              <?php if ($option['required']) { ?><b class="required">*</b><?php } ?><?php echo $option['name']; ?>:
+              <?php if ($option['explainhref']) { ?><a href="javascript:;" data-href="<?php echo $option['explainhref']; ?>"><i></i><?php echo $option['explainname']; ?></a><?php } ?>
+            </h4>
 
-              <?php if(count($option['option_parents'])){ ?>
+            <?php if(count($option['option_parents'])){ ?>
 
-                <?php foreach ($option['option_parents'] as $v) {?>
-                  <ul <?php echo "data-parent='".$v."'"; ?>>
-                  <?php foreach ($option['option_value'] as $key=>$option_value) {
-                    if($v == $option_value['option_parent']){
-                  ?>
-                    <li>
-                      <label for="option-value-<?php echo $option_value['product_option_value_id']; ?>">
-                        <input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>"/>
-                        <span><?php echo $option_value['name']!="-"?$option_value['name']:""; ?></span>
-
-                        <?php if ($option_value['price']){
-                            if ($option_value['name']=="-"){
-                              echo '<strong>'.$option_value['price'].'</strong>';
-                            }else{
-                              echo '<strong>(<b class="prefix">'.$option_value['price_prefix'].'</b>'.$option_value['price'].')</strong>';
-                            }
-                        }?>
-                      </label>
-                    </li>
-                  <?php }} ?>
-                  </ul>
-                <?php } ?>
-              <?php }else{ ?>
-
-                <ul>
-                <?php foreach ($option['option_value'] as $key=>$option_value) {?>
+              <?php foreach ($option['option_parents'] as $v) {?>
+                <ul <?php echo "data-parent='".$v."'"; ?>>
+                <?php foreach ($option['option_value'] as $key=>$option_value) {
+                  if($v == $option_value['option_parent']){
+                ?>
                   <li>
                     <label for="option-value-<?php echo $option_value['product_option_value_id']; ?>">
                       <input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>"/>
-                      <span><?php echo $option_value['name']!="-"?trim($option_value['name']):""; ?></span>
+                      <span><?php echo $option_value['name']!="-"?$option_value['name']:""; ?></span>
 
                       <?php if ($option_value['price']){
                           if ($option_value['name']=="-"){
@@ -124,24 +116,43 @@
                       }?>
                     </label>
                   </li>
-                <?php } ?>
+                <?php }} ?>
                 </ul>
-
               <?php } ?>
-            </div>
+            <?php }else{ ?>
+
+              <ul>
+              <?php foreach ($option['option_value'] as $key=>$option_value) {?>
+                <li>
+                  <label for="option-value-<?php echo $option_value['product_option_value_id']; ?>">
+                    <input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>"/>
+                    <span><?php echo $option_value['name']!="-"?trim($option_value['name']):""; ?></span>
+
+                    <?php if ($option_value['price']){
+                        if ($option_value['name']=="-"){
+                          echo '<strong>'.$option_value['price'].'</strong>';
+                        }else{
+                          echo '<strong>(<b class="prefix">'.$option_value['price_prefix'].'</b>'.$option_value['price'].')</strong>';
+                        }
+                    }?>
+                  </label>
+                </li>
+              <?php } ?>
+              </ul>
+
             <?php } ?>
+          </div>
+          <?php } ?>
 
 
-            <?php if ($option['type'] == 'textarea') { ?>
-            <div id="option-<?php echo $option['product_option_id']; ?>" class="option-item <?php echo $option['classname'];?>">
-              <h4 style="color:#f00;">
-                <?php if ($option['required']) { ?><b class="required">*</b><?php } ?><?php echo $option['name']; ?>:
-              </h4>
-              <textarea name="option[<?php echo $option['product_option_id']; ?>]" cols="40" rows="2"><?php echo $option['option_value']; ?></textarea>
-            </div>
-            <?php } ?>
-
-
+          <?php if ($option['type'] == 'textarea') { ?>
+          <div id="option-<?php echo $option['product_option_id']; ?>" class="option-item <?php echo $option['classname'];?>">
+            <h4 style="color:#f00;">
+              <?php if ($option['required']) { ?><b class="required">*</b><?php } ?><?php echo $option['name']; ?>:
+            </h4>
+            <textarea name="option[<?php echo $option['product_option_id']; ?>]" cols="40" rows="2"><?php echo $option['option_value']; ?></textarea>
+          </div>
+          <?php } ?>
         <?php } ?>
         <script type="text/javascript" src="catalog/view/javascript/jquery/amplification/jquery.zoombie.js"></script>
         <script type="text/javascript">
@@ -253,26 +264,26 @@
         <?php } ?>
       </div>
       <?php if ($review_status) { ?>
-      <div class="review">
+      <!--<div class="review">
         <div><img src="catalog/view/theme/default/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" />&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $reviews; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $text_write; ?></a></div>
-        <div class="share"><!-- AddThis Button BEGIN -->
+        <div class="share">&lt;!&ndash; AddThis Button BEGIN &ndash;&gt;
           <div class="addthis_default_style"><a class="addthis_button_compact"><?php echo $text_share; ?></a> <a class="addthis_button_email"></a><a class="addthis_button_print"></a> <a class="addthis_button_facebook"></a> <a class="addthis_button_twitter"></a></div>
-          <script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js"></script> 
-          <!-- AddThis Button END --> 
+          <script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js"></script>
+          &lt;!&ndash; AddThis Button END &ndash;&gt;
         </div>
       </div>
-      <?php } ?>
+      <?php } ?>-->
     </div>
   </div>
-  <div id="tabs" class="htabs"><a href="#tab-description"><?php echo $tab_description; ?></a>
+  <div id="moduleTabs" class="ui-info-tabs"><a href="#tab-description"><?php echo $tab_description; ?></a>
     <?php if ($attribute_groups) { ?>
-    <a href="#tab-attribute"><?php echo $tab_attribute; ?></a>
+      <a href="#tab-attribute"><?php echo $tab_attribute; ?></a>
     <?php } ?>
     <?php if ($review_status) { ?>
-    <a href="#tab-review"><?php echo $tab_review; ?></a>
+      <a href="#tab-review"><?php echo $tab_review; ?></a>
     <?php } ?>
     <?php if ($products) { ?>
-    <a href="#tab-related"><?php echo $tab_related; ?> (<?php echo count($products); ?>)</a>
+      <a href="#tab-related"><?php echo $tab_related; ?> (<?php echo count($products); ?>)</a>
     <?php } ?>
   </div>
   <div id="tab-description" class="tab-content"><?php echo $description; ?></div>
