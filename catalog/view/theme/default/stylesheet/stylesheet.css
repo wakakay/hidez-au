@@ -140,13 +140,13 @@ label{cursor:pointer;}
 #menu > ul > li + li{background:url('../image/split.png') no-repeat left center;}
 #menu > ul .top{padding:10px 12px;margin:0 10px;font-size:12px;color:white;text-align:center;letter-spacing:1px;display:block;}
 #menu > ul li ul{position:absolute;margin:0 0 0 10px;display:none;}
-#menu > ul ul li{padding:2px;clear:both;}
+#menu > ul ul li{clear:both;}
 #menu > ul .selected .top{background:url('../image/selected.png') repeat-x;color:white;}
 #menu > ul .parent{background-image:url('../image/arrow-right.png') no-repeat 95% center;}
-#menu > ul li ul ul{margin:-30px 0 0 214px;}
-#menu > ul li li a{padding:5px;margin:1px;color:white;width:200px;}
-#menu > ul li li li a{width:220px;}
-#menu > ul li li:hover > a{margin:0px;border:1px solid #BD4C14;background:#391706;}
+#menu > ul li ul ul{margin:-30px 0 0 232px;}
+#menu > ul li li a{padding:5px;margin:1px;color:white;width:220px;}
+#menu > ul li li li a{width:auto;}
+#menu > ul li li:hover > a{margin:0;border-top:1px solid #BD4C14;border-bottom:1px solid #BD4C14;background:#391706;}
 .silde_name{font:bold 30px/35px 'Arial';text-align:center;letter-spacing:2px;clear:both;}
 .breadcrumb{margin-bottom:5px;position:relative;font:normal 16px/24px 'Arial';}
 .breadcrumb span{position:absolute;right:10px;}
@@ -217,7 +217,7 @@ label{cursor:pointer;}
 .box-product .category-thumbs .ui-content a .cell-price b{color:#ef7b1d;}
 
 .box-product .name{word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;}
-.box-product .name a{font:bold 16px/30px 'Arial';color:white;text-align:center;display:block;}
+.box-product .name a{font:bold 14px/30px 'Arial';color:white;text-align:center;display:block;}
 
 .box-product .price{display:block;font-weight:bold;color:#ddd;margin-bottom:4px;}
 .box-product .price-old{color:#F00;text-decoration:line-through;}

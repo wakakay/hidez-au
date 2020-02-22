@@ -28,7 +28,7 @@
 <?php } ?>
 
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
     $(document).ready(function () {
         if ($("#currency_code").val() === 'USD') {
             window.location.replace('https://%77%77%77%2E%68%69%64%65%7A%2E%63%6F%6D/');
@@ -42,4 +42,4 @@
             window.location.replace('https://%77%77%77%2E%68%69%64%65%7A%2E%63%6F%6D/');
         });
     });
-</script>
+</script>-->

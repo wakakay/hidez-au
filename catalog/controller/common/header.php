@@ -97,12 +97,11 @@ class ControllerCommonHeader extends Controller {
 		$categories = $this->model_catalog_category->getCategories(0);
 		
 		foreach ($categories as $category) {
-			if ($category['top']) {
+			//if ($category['top']) {
 				// Level 2
 				$children_data = array();
 				
 				$children = $this->model_catalog_category->getCategories($category['category_id']);
-				
 				foreach ($children as $child) {
 					$data = array(
 						'filter_category_id'  => $child['category_id'],
@@ -112,7 +111,7 @@ class ControllerCommonHeader extends Controller {
 					$product_total = $this->model_catalog_product->getTotalProducts($data);
 									
 					$children_data[] = array(
-						'name'  => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $product_total . ')' : ''),
+						'name'  => $child['name'], // . ($this->config->get('config_product_count') ? ' (' . $product_total . ')' : ''),
 						'href'  => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])
 					);						
 				}
@@ -124,7 +123,7 @@ class ControllerCommonHeader extends Controller {
 					'column'   => $category['column'] ? $category['column'] : 1,
 					'href'     => $this->url->link('product/category', 'path=' . $category['category_id'])
 				);
-			}
+			//}
 		}
 		
 		$this->children = array(

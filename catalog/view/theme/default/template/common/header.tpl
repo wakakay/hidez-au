@@ -48,18 +48,10 @@
     <![endif]-->
     <?php if ($stores) { ?>
     <script type="text/javascript"><!--
-    $(document).ready(function () {
-    <
-            ? php foreach($stores as $store)
-        {
-                ?
-        >
+    $(document).ready(function() {
+    <?php foreach ($stores as $store) { ?>
             $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></iframe>');
-        <
-                ? php
-        }
-            ?
-    >
+        <?php } ?>
     });
     //--></script>
     <?php } ?>
@@ -110,82 +102,27 @@
                             <li><a href="?route=information/information&information_id=33" class="">Canine Faqs</a></li>
                         </ul>
                     </li>
-                    <li><a href="?route=product/allproducts" class="top">Shop Now</a>
+                    <li><a href="?route=product/allproducts" class="top">Categoties</a>
                         <ul>
-                            <li><a href="?route=product/category&path=68">EQUINE TRAVEL & RECOVERY SUIT</a>
-                                <ul>
-                                    <li><a href="?route=product/category&path=59">EQUINE TRAVEL & RECOVERY SUIT ORIGINAL</a>
-                                    </li>
-                                    <li><a href="?route=product/category&path=60">EQUINE TRAVEL & RECOVERY SUIT PRINTED</a></li>
-                                    <li><a href="?route=product/category&path=67">EQUINE TRAVEL & RECOVERY SUIT CUSTOM</a></li>
-                                </ul>
+                            <?php foreach ($categories as $category) { ?>
+                            <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a>
+                                <?php if ($category['children']) { ?>
+                                    <?php for ($i = 0; $i < count($category['children']);) { ?>
+                                    <ul>
+                                        <?php $j = $i + ceil(count($category['children']) / $category['column']); ?>
+                                        <?php for (; $i < $j; $i++) { ?>
+                                        <?php if (isset($category['children'][$i])) { ?>
+                                        <li><a href="<?php echo $category['children'][$i]['href']; ?>"><?php echo $category['children'][$i]['name']; ?></a></li>
+                                        <?php } ?>
+                                        <?php } ?>
+                                    </ul>
+                                    <?php } ?>
+                                <?php } ?>
                             </li>
-                            <li><a href="?route=product/category&path=69">EQUINE ACTIVE SUIT</a>
-                                <ul>
-                                    <li><a href="?route=product/category&path=69_77">EQUINE ACTIVE SUIT ORIGINAL</a></li>
-                                    <li><a href="?route=product/category&path=69_78">EQUINE ACTIVE SUIT PRINTED</a></li>
-                                    <li><a href="?route=product/category&path=69_79">EQUINE ACTIVE SUIT CUSTOM</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="?route=product/category&path=70">RACING GREYHOUND SUIT</a>
-                                <ul>
-                                    <li><a href="?route=product/category&path=70_64">RACING GREYHOUND SUIT ORIGINAL</a></li>
-                                    <li><a href="?route=product/category&path=70_62">RACING GREYHOUND SUIT PRINTED</a></li>
-                                    <li><a href="?route=product/category&path=70_66">RACING GREYHOUND SUIT CUSTOM</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="?route=product/category&path=71">EQUINE COMPRESSION SOCK</a>
-                                <ul>
-                                    <li><a href="?route=product/category&path=71_80">EQUINE COMPRESSION SOCK ORIGINAL</a></li>
-                                    <li><a href="?route=product/category&path=71_81">EQUINE COMPRESSION SOCK PRINTED</a></li>
-                                    <li><a href="?route=product/category&path=71_82">EQUINE COMPRESSION SOCK CUSTOM</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="?route=product/category&path=72">EQUINE ICE COMPRESSION SOCK</a>
-                                <ul>
-                                    <li><a href="?route=product/category&path=72_83">EQUINE ICE COMPRESSION SOCK ORIGINAL</a></li>
-                                    <li><a href="?route=product/category&path=71_84">EQUINE ICE COMPRESSION SOCK PRINTED</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="?route=product/category&path=98">EQUINE COMPRESSION HOOD</a>
-                                <ul>
-                                    <li><a href="?route=product/category&path=78_99">EQUINE COMPRESSION HOOD ORIGINAL</a></li>
-                                    <li><a href="?route=product/category&path=71_100">EQUINE COMPRESSION HOOD PRINTED</a></li>
-                                    <li><a href="?route=product/category&path=71_101">EQUINE COMPRESSION HOOD CUSTOM</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="?route=product/category&path=106">EQUINE COMPRESSION HOOD WITH EARS</a>
-                                <ul>
-                                    <li><a href="?route=product/category&path=106_107">EQUINE COMPRESSION HOOD ORIGINAL</a></li>
-                                    <li><a href="?route=product/category&path=106_108">EQUINE COMPRESSION HOOD PRINTED</a></li>
-                                    <li><a href="?route=product/category&path=106_109">EQUINE COMPRESSION HOOD CUSTOM</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="?route=product/category&path=74">EQUINE NECK</a>
-                                <ul>
-                                    <li><a href="?route=product/category&path=74_89">EQUINE NECK ORIGINAL</a></li>
-                                    <li><a href="?route=product/category&path=74_90">EQUINE NECK PRINTED</a></li>
-                                    <li><a href="?route=product/category&path=74_91">EQUINE NECK CUSTOM</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="?route=product/category&path=73">CANINE ICE COMPRESSION SUIT</a></li>
-                            <li><a href="?route=product/category&path=75">CANINE ANXIETY SUIT</a>
-                                <ul>
-                                    <li><a href="?route=product/category&path=75_92">CANINE ANXIETY SUIT ORIGINAL</a></li>
-                                    <li><a href="?route=product/category&path=75_93">CANINE ANXIETY SUIT PRINTED</a></li>
-                                    <li><a href="?route=product/category&path=75_94">CANINE ANXIETY SUIT CUSTOM</a></li>
-                                </ul>
-                            </li>
-                            <!--li><a href="?route=product/category&path=76">RACING CAMEL SUIT</a>
-                                <ul>
-                                  <li><a href="?route=product/category&path=76_95">RACING CAMEL SUIT ORIGINAL</a></li>
-                                <li><a href="?route=product/category&path=76_96">RACING CAMEL SUIT PRINTED</a></li>
-                                <li><a href="?route=product/category&path=76_97">RACING CAMEL SUIT CUSTOM</a></li>
-                              </ul>
-                            </li-->
+                            <?php } ?>
                         </ul>
                     </li>
-                    <li><a href="javascript:void(0);" class="top">Fitting Instructions</a>
+                    <li><a href="javascript:;" class="top">Fitting Instructions</a>
                         <ul>
                             <li><a href="?route=information/information&information_id=8">Equine Fitting Instructions</a></li>
                             <li><a href="?route=information/information&information_id=9">Equine How To Measure</a></li>
