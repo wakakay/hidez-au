@@ -152,7 +152,7 @@ label{cursor:pointer;}
 .breadcrumb span{position:absolute;right:10px;}
 .breadcrumb span a{color:red;}
 .product_con p{font:normal 12px/18px '';color:white;text-indent:2em;letter-spacing:1px;text-align:justify;}
-#notification{padding:0;clear:both;position:absolute;top:35px;right:0;z-index:98;}
+#notification{padding:0;clear:both;position:absolute;top:35px;right:0;z-index:120;}
 .success, .attention, .information{padding:10px 25px 10px 33px;color:#555555;line-height:14px;-webkit-border-radius:5px 5px 5px 5px;-moz-border-radius:5px 5px 5px 5px;-khtml-border-radius:5px 5px 5px 5px;border-radius:5px 5px 5px 5px;}
 .success a{color:red;}
 .success{background:#EAF7D9 url('../image/success.png') 10px center no-repeat;border:1px solid #BBDF8D;-webkit-border-radius:5px 5px 5px 5px;-moz-border-radius:5px 5px 5px 5px;-khtml-border-radius:5px 5px 5px 5px;border-radius:5px 5px 5px 5px;}

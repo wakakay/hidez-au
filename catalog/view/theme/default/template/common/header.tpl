@@ -102,7 +102,7 @@
                             <li><a href="?route=information/information&information_id=33" class="">Canine Faqs</a></li>
                         </ul>
                     </li>
-                    <li><a href="?route=product/allproducts" class="top">Categoties</a>
+                    <li><a href="?route=product/allproducts" class="top">Categories</a>
                         <ul>
                             <?php foreach ($categories as $category) { ?>
                             <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a>
