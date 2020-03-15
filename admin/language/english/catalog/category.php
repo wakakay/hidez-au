@@ -19,6 +19,9 @@ $_['entry_name']             = 'Category Name:';
 $_['entry_meta_keyword'] 	 = 'Meta Tag Keywords:';
 $_['entry_meta_description'] = 'Meta Tag Description:';
 $_['entry_description']      = 'Description:';
+$_['entry_identify_your_horse']      = '.IDENTIFY YOUR HORSE(识别你的马):'; //
+$_['entry_size_and_measure']         = 'SIZING & HOW TO MEASURE(尺寸表跟怎么测量):'; //
+$_['entry_fitting_chart']            = 'FITTING INSTRUCTION(合适的指令):'; //
 $_['entry_parent']           = 'Parent:';
 $_['entry_filter']           = 'Filters:<br /><span class="help">(Autocomplete)</span>';
 $_['entry_store']            = 'Stores:';

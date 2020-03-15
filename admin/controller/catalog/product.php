@@ -577,6 +577,8 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['entry_meta_description'] = $this->language->get('entry_meta_description');
 		$this->data['entry_meta_keyword'] = $this->language->get('entry_meta_keyword');
 		$this->data['entry_description'] = $this->language->get('entry_description');
+		$this->data['entry_benefit'] = $this->language->get('entry_benefit');
+		$this->data['entry_testimonial'] = $this->language->get('entry_testimonial');
 		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_keyword'] = $this->language->get('entry_keyword');
 		$this->data['entry_model'] = $this->language->get('entry_model');
@@ -640,7 +642,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['tab_option'] = $this->language->get('tab_option');		
 		$this->data['tab_discount'] = $this->language->get('tab_discount');
 		$this->data['tab_special'] = $this->language->get('tab_special');
-    $this->data['tab_image'] = $this->language->get('tab_image');		
+        $this->data['tab_image'] = $this->language->get('tab_image');
 		$this->data['tab_links'] = $this->language->get('tab_links');
 		$this->data['tab_reward'] = $this->language->get('tab_reward');
 		$this->data['tab_design'] = $this->language->get('tab_design');

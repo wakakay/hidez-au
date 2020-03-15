@@ -1,4 +1,8 @@
-<div id="cart">
-  <div class="heading">
-    <a href="?route=checkout/cart"><span id="cart-total"><?php echo $text_items; ?></span></a></div>
+<div class="ui-cart">
+  <a href="?route=checkout/cart">
+    <p class="cart-total-content">
+      <?php echo $text_total_items; ?>
+      <?php echo $text_items; ?>
+    </p>
+  </a>
 </div>

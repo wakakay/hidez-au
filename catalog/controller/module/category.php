@@ -52,7 +52,7 @@ class ControllerModuleCategory extends Controller {
 					'name'        => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $product_total . ')' : ''),
 					'thumb'       => $this->model_tool_image->resize($child['image'], "110", "73"),
 					'price'       => $child['price'] > 0 ? $this->currency->formatProduct($child['price']) : '',
-					'maxprice'    => $child['maxprice'] > 0 ? ' - '.$this->currency->formatProduct($child['maxprice']) : '',
+					'maxprice'    => ($child['maxprice'] > 0 && $child['price'] !== $child['maxprice']) ? ' - '.$this->currency->formatProduct($child['maxprice']) : '',
 					'href'        => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])	
 				);		
 			}

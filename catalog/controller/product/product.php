@@ -266,19 +266,24 @@ class ControllerProductProduct extends Controller {
 			$this->data['button_continue'] = $this->language->get('button_continue');
 			
 			$this->load->model('catalog/review');
-
+			$this->data['tab_size_and_measure'] = $this->language->get('tab_size_and_measure');
+			$this->data['tab_identify_your_horse'] = $this->language->get('tab_identify_your_horse');
+			$this->data['tab_benefit'] = $this->language->get('tab_benefit');
+			$this->data['tab_fitting_chart'] = $this->language->get('tab_fitting_chart');
+			$this->data['tab_testimonial'] = $this->language->get('tab_testimonial');
 			$this->data['tab_description'] = $this->language->get('tab_description');
+
 			$this->data['tab_attribute'] = $this->language->get('tab_attribute');
 			$this->data['tab_review'] = sprintf($this->language->get('tab_review'), $product_info['reviews']);
 			$this->data['tab_related'] = $this->language->get('tab_related');
-			
+
 			$this->data['product_id'] = $this->request->get['product_id'];
 			$this->data['manufacturer'] = $product_info['manufacturer'];
 			$this->data['manufacturers'] = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $product_info['manufacturer_id']);
 			$this->data['model'] = $product_info['model'];
 			$this->data['reward'] = $product_info['reward'];
 			$this->data['points'] = $product_info['points'];
-			
+
 			/*if ($product_info['quantity'] <= 0) {
 				$this->data['stock'] = $product_info['stock_status'];
 			} elseif ($this->config->get('config_stock_display')) {
@@ -287,7 +292,7 @@ class ControllerProductProduct extends Controller {
 				$this->data['stock'] = $this->language->get('text_instock');
 			}*/
 			$this->data['stock'] = $product_info['stock_status'];
-			
+
 			$this->load->model('tool/image');
 
 			if ($product_info['image']) {
@@ -295,23 +300,23 @@ class ControllerProductProduct extends Controller {
 			} else {
 				$this->data['popup'] = '';
 			}
-			
+
 			if ($product_info['image']) {
 				$this->data['thumb'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height'));
 			} else {
 				$this->data['thumb'] = '';
 			}
-			
+
 			$this->data['images'] = array();
-			
+
 			$results = $this->model_catalog_product->getProductImages($this->request->get['product_id']);
-			
+
 			foreach ($results as $result) {
 				$this->data['images'][] = array(
 					'popup' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')),
 					'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'))
 				);
-			}	
+			}
 			if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
 				if($product_info['maxprice']>0 && $product_info['maxprice'] != $product_info['price']){
 					if($product_info['maxprice']>$product_info['price']){
@@ -322,53 +327,53 @@ class ControllerProductProduct extends Controller {
 				}else{
 					$this->data['price'] = $this->currency->formatProduct($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')));
 				}
-				
+
 			} else {
 				$this->data['price'] = false;
 			}
-						
+
 			if ((float)$product_info['special']) {
 				$this->data['special'] = $this->currency->formatProduct($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')));
 			} else {
 				$this->data['special'] = false;
 			}
-			
+
 			if ($this->config->get('config_tax')) {
 				$this->data['tax'] = $this->currency->format((float)$product_info['special'] ? $product_info['special'] : $product_info['price']);
 			} else {
 				$this->data['tax'] = false;
 			}
-			
+
 			$discounts = $this->model_catalog_product->getProductDiscounts($this->request->get['product_id']);
-			
-			$this->data['discounts'] = array(); 
-			
+
+			$this->data['discounts'] = array();
+
 			foreach ($discounts as $discount) {
 				$this->data['discounts'][] = array(
 					'quantity' => $discount['quantity'],
 					'price'    => $this->currency->format($this->tax->calculate($discount['price'], $product_info['tax_class_id'], $this->config->get('config_tax')))
 				);
 			}
-			
+
 			$this->data['options'] = array();
-			
-			foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) { 
-				if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'checkbox' || $option['type'] == 'image') { 
+
+			foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) {
+				if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'checkbox' || $option['type'] == 'image') {
 					$option_value_data = array();
 					$option_parents = array();
 					foreach ($option['option_value'] as $option_value) {
 						if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
 							if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
-								
+
 								$price = $this->currency->formatProduct($this->tax->calculate($option_value['price'], $product_info['tax_class_id'], $this->config->get('config_tax')));
 							} else {
 								$price = false;
 							}
-							
+
 							if($option_value['option_parent']!="" && !in_array($option_value['option_parent'],$option_parents)){
 									array_push($option_parents, $option_value['option_parent']);
 							}
-							
+
 							$option_value_data[] = array(
 								'product_option_value_id' => $option_value['product_option_value_id'],
 								'option_value_id'         => $option_value['option_value_id'],
@@ -380,7 +385,7 @@ class ControllerProductProduct extends Controller {
 							);
 						}
 					}
-					
+
 					$this->data['options'][] = array(
 						'product_option_id' => $option['product_option_id'],
 						'option_id'         => $option['option_id'],
@@ -392,7 +397,7 @@ class ControllerProductProduct extends Controller {
 						'type'              => $option['type'],
 						'option_value'      => $option_value_data,
 						'required'          => $option['required']
-					);				
+					);
 				} elseif ($option['type'] == 'text' || $option['type'] == 'textarea' || $option['type'] == 'file' || $option['type'] == 'date' || $option['type'] == 'datetime' || $option['type'] == 'time') {
 					$this->data['options'][] = array(
 						'product_option_id' => $option['product_option_id'],
@@ -405,24 +410,27 @@ class ControllerProductProduct extends Controller {
 						'type'              => $option['type'],
 						'option_value'      => $option['option_value'],
 						'required'          => $option['required']
-					);						
+					);
 				}
 			}
-		
+
 			if ($product_info['minimum']) {
 				$this->data['minimum'] = $product_info['minimum'];
 			} else {
 				$this->data['minimum'] = 1;
 			}
-			
+
 			$this->data['review_status'] = $this->config->get('config_review_status');
 			$this->data['reviews'] = sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']);
 			$this->data['rating'] = (int)$product_info['rating'];
 			$this->data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
+			$this->data['identify_your_horse'] = html_entity_decode($product_info['identify_your_horse'], ENT_QUOTES, 'UTF-8');
+			$this->data['size_and_measure'] = html_entity_decode($product_info['size_and_measure'], ENT_QUOTES, 'UTF-8');
+			$this->data['fitting_chart'] = html_entity_decode($product_info['fitting_chart'], ENT_QUOTES, 'UTF-8');
 			$this->data['attribute_groups'] = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
-			
+
 			$this->data['products'] = array();
-			
+
 			$results = $this->model_catalog_product->getProductRelated($this->request->get['product_id']);
 			
 			foreach ($results as $result) {

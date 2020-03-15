@@ -37,7 +37,13 @@ $_['entry_bad']         = 'Bad';
 $_['entry_captcha']     = 'Enter the code in the box below:';
 
 // Tabs
-$_['tab_description']   = 'Description';
+
+$_['tab_identify_your_horse']  = 'IDENTIFY YOUR HORSE'; // 1识别你的马
+$_['tab_size_and_measure']     = 'SIZING & HOW TO MEASURE'; // 2尺寸表跟怎么测量
+$_['tab_benefit']              = 'BENEFIT'; // 3
+$_['tab_fitting_chart']        = 'FITTING INSTRUCTION'; // 4合适的指令
+$_['tab_testimonial']   = 'TESTIMONIAL'; // 5
+$_['tab_description']   = 'PHOTOS & VIDEOS'; // 6
 $_['tab_attribute']     = 'Specification';
 $_['tab_review']        = 'Reviews (%s)';
 $_['tab_related']       = 'Related Products'; 

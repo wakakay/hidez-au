@@ -19,7 +19,7 @@
     <?php foreach ($links as $link) { ?>
     <link href="<?php echo $link['href']; ?>" rel="<?php echo $link['rel']; ?>"/>
     <?php } ?>
-    <link rel="stylesheet" type="text/css" href="catalog/view/theme/default/stylesheet/stylesheet.css"/>
+    <link rel="stylesheet" type="text/css" href="catalog/view/theme/default/stylesheet/stylesheet.css?<?php echo $_SERVER['REQUEST_TIME']; ?>"/>
     <?php foreach ($styles as $style) { ?>
     <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>"
           media="<?php echo $style['media']; ?>"/>
@@ -61,7 +61,6 @@
 <body>
 
 <div id="container">
-
     <div id="google_translate_element"></div>
 
     <div id="header">
@@ -81,7 +80,7 @@
                 </div>
                 <?php echo $currency; ?>
 
-                <?php echo $cart; ?>
+                <div class="ui-cart-box"><?php echo $cart; ?></div>
             </div>
 
             <div id="menu">
@@ -162,6 +161,9 @@
     </div>
 
     <div id="notification"></div>
+    <div class="ui-fixed-cart">
+        <?php echo $cart; ?>
+    </div>
     <script type="text/javascript" src="catalog/view/javascript/jquery/backTop.js"></script>
     <script type="text/javascript">
         $(function () {

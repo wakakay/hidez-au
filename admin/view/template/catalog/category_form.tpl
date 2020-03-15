@@ -42,8 +42,40 @@
               </tr>
               <tr>
                 <td><?php echo $entry_description; ?></td>
-                <td><textarea name="category_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['description'] : ''; ?></textarea></td>
+                <td>
+                    <textarea name="category_description[<?php echo $language['language_id']; ?>][description]"
+                              id="description<?php echo $language['language_id']; ?>">
+                        <?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['description'] : ''; ?>
+                    </textarea>
+                </td>
               </tr>
+                <tr>
+                    <td><?php echo $entry_identify_your_horse; ?></td>
+                    <td>
+                        <textarea name="category_description[<?php echo $language['language_id']; ?>][identify_your_horse]"
+                                  id="identifyYourHorse<?php echo $language['language_id']; ?>">
+                        <?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['identify_your_horse'] : ''; ?>
+                    </textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td><?php echo $entry_size_and_measure; ?></td>
+                    <td>
+                        <textarea name="category_description[<?php echo $language['language_id']; ?>][size_and_measure]"
+                                  id="sizeAndMeasure<?php echo $language['language_id']; ?>">
+                        <?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['size_and_measure'] : ''; ?>
+                    </textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td><?php echo $entry_fitting_chart; ?></td>
+                    <td>
+                        <textarea name="category_description[<?php echo $language['language_id']; ?>][fitting_chart]"
+                                  id="fittingChart<?php echo $language['language_id']; ?>">
+                        <?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['fitting_chart'] : ''; ?>
+                    </textarea>
+                    </td>
+                </tr>
             </table>
           </div>
           <?php } ?>
@@ -188,8 +220,9 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
-<script type="text/javascript"><!--
+<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
+
+<script type="text/javascript">
 <?php foreach ($languages as $language) { ?>
 CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
 	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
@@ -199,8 +232,35 @@ CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
 	filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
 });
+
+  CKEDITOR.replace('identifyYourHorse<?php echo $language['language_id']; ?>', {
+    filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
+  });
+
+  CKEDITOR.replace('sizeAndMeasure<?php echo $language['language_id']; ?>', {
+    filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
+  });
+
+  CKEDITOR.replace('fittingChart<?php echo $language['language_id']; ?>', {
+    filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
+  });
 <?php } ?>
-//--></script> 
+</script>
 <script type="text/javascript"><!--
 $('input[name=\'path\']').autocomplete({
 	delay: 500,

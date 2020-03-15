@@ -19,7 +19,10 @@
 			var controlTop=$window.height() - $this.height()-opts.pageHeightJg;
 			controlTop=cssfixedsupport ? $window.scrollTop() + controlTop : controlTop;
 			var shouldvisible=( $window.scrollTop() >= opts.startline )? true : false;
-			
+
+			$('.ui-fixed-cart').css({
+				left: controlLeft
+			}).show();
 			if (shouldvisible){
 				$this.stop().show();
 			}else{
