@@ -15,11 +15,11 @@ class ModelCatalogProduct extends Model {
 		LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id)
 		LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id)
 		LEFT JOIN " . DB_PREFIX . "manufacturer m ON (p.manufacturer_id = m.manufacturer_id)
-		LEFT JOIN (SELECT ptc.product_id, cd.identify_your_horse, cd.size_and_measure, cd.fitting_chart
+		LEFT JOIN (SELECT ptc.product_id, c.parent_id, cd.identify_your_horse, cd.size_and_measure, cd.fitting_chart
         FROM  " . DB_PREFIX . "product_to_category ptc
         LEFT JOIN " . DB_PREFIX . "category c ON (ptc.category_id = c.category_id)
         LEFT JOIN " . DB_PREFIX . "category_description cd ON (cd.category_id = c.parent_id)
-        WHERE ptc.product_id = '" . (int)$product_id . "') cdd ON (cdd.product_id = p.product_id)
+        WHERE ptc.product_id = '" . (int)$product_id . "' AND c.parent_id) cdd ON (cdd.product_id = p.product_id)
 		WHERE p.product_id = '" . (int)$product_id . "' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");
 
 		if ($query->num_rows) {

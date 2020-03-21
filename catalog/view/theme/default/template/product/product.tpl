@@ -304,7 +304,9 @@
     </div>
 
     <div id="moduleTabs" class="ui-tabs-title">
-        <a data-tab="tab-identify-your-horse" class="is-selected"><?php echo $tab_identify_your_horse; ?></a>
+        <?php if (!!$identify_your_horse) { ?>
+         <a data-tab="tab-identify-your-horse"><?php echo $tab_identify_your_horse; ?></a>
+        <?php } ?>
         <a data-tab="tab-size-and-measure"><?php echo $tab_size_and_measure; ?></a>
         <a data-tab="tab-benefit"><?php echo $tab_benefit; ?></a>
         <a data-tab="tab-fitting-chart"><?php echo $tab_fitting_chart; ?></a>
@@ -321,11 +323,13 @@
         <?php } ?>-->
     </div>
     <div class="ui-tabs-content">
+        <?php if (!!$identify_your_horse) { ?>
         <div id="tab-identify-your-horse" class="tab-content"><?php echo $identify_your_horse; ?></div>
+        <?php } ?>
         <div id="tab-size-and-measure" class="tab-content"><?php echo $size_and_measure; ?></div>
-        <div id="tab-benefit" class="tab-content"></div>
-        <div id="tab-fitting-chart" class="tab-content"></div>
-        <div id="tab-testimonial" class="tab-content"></div>
+        <div id="tab-benefit" class="tab-content"><?php echo $benefit; ?></div>
+        <div id="tab-fitting-chart" class="tab-content"><?php echo $fitting_chart; ?></div>
+        <div id="tab-testimonial" class="tab-content"><?php echo $testimonial; ?></div>
         <div id="tab-description" class="tab-content"><?php echo $description; ?></div>
     </div>
 
@@ -559,7 +563,7 @@ product_option_id
     });
   });
 
-  $(".ui-tabs-title a").on('click', function() {
+  $(".ui-tabs-title a").on('hover', function() {
     $(this).addClass('is-selected').siblings().removeClass('is-selected')
     $('.ui-tabs-content .tab-content').hide().eq($(this).index()).show()
   })

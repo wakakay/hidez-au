@@ -424,6 +424,8 @@ class ControllerProductProduct extends Controller {
 			$this->data['reviews'] = sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']);
 			$this->data['rating'] = (int)$product_info['rating'];
 			$this->data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
+			$this->data['benefit'] = html_entity_decode($product_info['benefit'], ENT_QUOTES, 'UTF-8');
+			$this->data['testimonial'] = html_entity_decode($product_info['testimonial'], ENT_QUOTES, 'UTF-8');
 			$this->data['identify_your_horse'] = html_entity_decode($product_info['identify_your_horse'], ENT_QUOTES, 'UTF-8');
 			$this->data['size_and_measure'] = html_entity_decode($product_info['size_and_measure'], ENT_QUOTES, 'UTF-8');
 			$this->data['fitting_chart'] = html_entity_decode($product_info['fitting_chart'], ENT_QUOTES, 'UTF-8');

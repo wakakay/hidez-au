@@ -1,6 +1,7 @@
 .DS_Store
 image/
 system/cache/
+system/logs/
 error_log.log*
 
 # Editor directories and files
