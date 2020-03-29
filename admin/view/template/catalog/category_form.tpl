@@ -68,11 +68,29 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><?php echo $entry_benefits; ?></td>
+                    <td>
+                        <textarea name="category_description[<?php echo $language['language_id']; ?>][benefits]"
+                                  id="benefits<?php echo $language['language_id']; ?>">
+                        <?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['benefits'] : ''; ?>
+                    </textarea>
+                    </td>
+                </tr>
+                <tr>
                     <td><?php echo $entry_fitting_chart; ?></td>
                     <td>
                         <textarea name="category_description[<?php echo $language['language_id']; ?>][fitting_chart]"
                                   id="fittingChart<?php echo $language['language_id']; ?>">
                         <?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['fitting_chart'] : ''; ?>
+                    </textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td><?php echo $entry_testimonials; ?></td>
+                    <td>
+                        <textarea name="category_description[<?php echo $language['language_id']; ?>][testimonials]"
+                                  id="testimonials<?php echo $language['language_id']; ?>">
+                        <?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['testimonials'] : ''; ?>
                     </textarea>
                     </td>
                 </tr>
@@ -251,7 +269,25 @@ CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
     filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
   });
 
+  CKEDITOR.replace('benefits<?php echo $language['language_id']; ?>', {
+    filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
+  });
+
   CKEDITOR.replace('fittingChart<?php echo $language['language_id']; ?>', {
+    filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
+  });
+
+  CKEDITOR.replace('testimonials<?php echo $language['language_id']; ?>', {
     filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
     filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
     filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',

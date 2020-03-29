@@ -307,7 +307,9 @@
         <?php if (!!$identify_your_horse) { ?>
          <a data-tab="tab-identify-your-horse"><?php echo $tab_identify_your_horse; ?></a>
         <?php } ?>
+        <?php if (!!$size_and_measure) { ?>
         <a data-tab="tab-size-and-measure"><?php echo $tab_size_and_measure; ?></a>
+        <?php } ?>
         <a data-tab="tab-benefit"><?php echo $tab_benefit; ?></a>
         <a data-tab="tab-fitting-chart"><?php echo $tab_fitting_chart; ?></a>
         <a data-tab="tab-testimonial"><?php echo $tab_testimonial; ?></a>
@@ -326,7 +328,9 @@
         <?php if (!!$identify_your_horse) { ?>
         <div id="tab-identify-your-horse" class="tab-content"><?php echo $identify_your_horse; ?></div>
         <?php } ?>
+        <?php if (!!$size_and_measure) { ?>
         <div id="tab-size-and-measure" class="tab-content"><?php echo $size_and_measure; ?></div>
+        <?php } ?>
         <div id="tab-benefit" class="tab-content"><?php echo $benefit; ?></div>
         <div id="tab-fitting-chart" class="tab-content"><?php echo $fitting_chart; ?></div>
         <div id="tab-testimonial" class="tab-content"><?php echo $testimonial; ?></div>
@@ -563,6 +567,7 @@ product_option_id
     });
   });
 
+  $(".ui-tabs-title a").eq(0).addClass('is-selected');
   $(".ui-tabs-title a").on('hover', function() {
     $(this).addClass('is-selected').siblings().removeClass('is-selected')
     $('.ui-tabs-content .tab-content').hide().eq($(this).index()).show()

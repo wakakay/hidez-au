@@ -498,7 +498,7 @@ label{cursor:pointer;}
 #top .banner ul li .introd a:hover{text-decoration:none;cursor:default;}
 #top .banner .tit{font:bold 25px/30px 'Arial';color:black;width:90%;text-align:center;position:absolute;top:5px;}
 #top #news{margin-bottom:20px;background:url('../images/box_bg.png') repeat-y left top;overflow:hidden;}
-#top #news .tit{background:url('../image/menu_bg.png') repeat-x;height:32px;text-align:center;font:bold 14px/32px '';}
+#top #news .tit{background:url('../image/menu_bg.png') repeat-x;height:32px;text-align:center;font:bold 12px/32px '';}
 #top #news .box-heading{display:none;}/*#top #news .news_img{width:248px;height:246px;}*/#top #news .news_img{width:196px;height:194px;}
 #top #news .module_bg{height:4px;background:url('../images/module_bg.png') no-repeat;margin:1px 0;}
 #top #news .newsIntr{clear:both;background:url('../images/news_tit.png') no-repeat;height:36px;text-align:center;}
@@ -646,13 +646,15 @@ a.backToTop:hover{background-position:0 -48px;}
 .fackbook-box .ui-facebook{width:500px;height:614px;padding:6px;float:right;border:1px solid #323232;overflow:hidden;}
 .fb_iframe_widget{left:-1px;top:-1px;right:-1px;}
 /* 文章 */
+.ui-video{width:960px;margin:0 auto;border:1px solid #ccc;}
+.ui-video video{width:960px;}
 .size-table{margin:0 10px 20px;}
 .size-table .ui-content{padding:20px 0;}
 .size-table .ui-content .ui-text{width:460px;padding:10px;}
 .size-table .ui-content .ui-text h3{padding-bottom:20px;font-size:18px;color:#fff100;text-align:left;letter-spacing:1px;}
 .size-table .ui-content .ui-text p{padding-bottom:10px;font-size:14px;color:#fff;line-height:20px;letter-spacing:1px;}
 .size-table table{border-collapse:collapse;border-spacing:0;}
-.size-table th, .size-table td{padding:8px 10px;font-size:14px;background-color:#231815;border:1px solid #f5f5f5 !important;}
+.size-table th, .size-table td{padding:8px 10px;font-size:14px;text-align:center;background-color:#231815;border:1px solid #f5f5f5 !important;}
 .size-table tr.cell-title-tr th{padding:12px 10px;background-color:#f11d29;}
 .size-table tr.cell-sub-tr th{color:#fff100;}
 .size-table tr:hover td{background-color:rgba(222,0,1,.75);color:#fff;}
