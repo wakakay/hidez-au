@@ -229,6 +229,7 @@ class ControllerCatalogCategory extends Controller {
 		$this->data['entry_benefits'] = $this->language->get('entry_benefits');
 		$this->data['entry_fitting_chart'] = $this->language->get('entry_fitting_chart');
 		$this->data['entry_testimonials'] = $this->language->get('entry_testimonials');
+		$this->data['entry_video'] = $this->language->get('entry_video');
 		$this->data['entry_parent'] = $this->language->get('entry_parent');
 		$this->data['entry_filter'] = $this->language->get('entry_filter');
 		$this->data['entry_store'] = $this->language->get('entry_store');

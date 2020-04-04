@@ -429,6 +429,7 @@ class ControllerProductProduct extends Controller {
 			$this->data['identify_your_horse'] = html_entity_decode($product_info['identify_your_horse'], ENT_QUOTES, 'UTF-8');
 			$this->data['size_and_measure'] = html_entity_decode($product_info['size_and_measure'], ENT_QUOTES, 'UTF-8');
 			$this->data['fitting_chart'] = html_entity_decode($product_info['fitting_chart'], ENT_QUOTES, 'UTF-8');
+			$this->data['video'] = html_entity_decode($product_info['video'], ENT_QUOTES, 'UTF-8');
 			$this->data['attribute_groups'] = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
 
 			$this->data['products'] = array();

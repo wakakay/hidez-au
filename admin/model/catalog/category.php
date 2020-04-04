@@ -10,7 +10,7 @@ class ModelCatalogCategory extends Model {
 		}
 		
 		foreach ($data['category_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "category_description SET category_id = '" . (int)$category_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', description = '" . $this->db->escape($value['description']) . "', identify_your_horse = '" . $this->db->escape($value['identify_your_horse']) . "', size_and_measure = '" . $this->db->escape($value['size_and_measure']) . "', benefits = '" . $this->db->escape($value['benefits']) . "', testimonials = '" . $this->db->escape($value['testimonials']) . "', fitting_chart = '" . $this->db->escape($value['fitting_chart']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "category_description SET category_id = '" . (int)$category_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', description = '" . $this->db->escape($value['description']) . "', identify_your_horse = '" . $this->db->escape($value['identify_your_horse']) . "', size_and_measure = '" . $this->db->escape($value['size_and_measure']) . "', benefits = '" . $this->db->escape($value['benefits']). "', testimonials = '" . $this->db->escape($value['testimonials']). "', video = '" . $this->db->escape($value['video']). "', fitting_chart = '" . $this->db->escape($value['fitting_chart']) . "'");
 		}
 
 		// MySQL Hierarchical Data Closure Table Pattern
@@ -64,7 +64,7 @@ class ModelCatalogCategory extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "category_description WHERE category_id = '" . (int)$category_id . "'");
 
 		foreach ($data['category_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "category_description SET category_id = '" . (int)$category_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', description = '" . $this->db->escape($value['description']) . "', identify_your_horse = '" . $this->db->escape($value['identify_your_horse']) . "', size_and_measure = '" . $this->db->escape($value['size_and_measure']) . "', benefits = '" . $this->db->escape($value['benefits']) . "', fitting_chart = '" . $this->db->escape($value['fitting_chart']) . "', testimonials = '" . $this->db->escape($value['testimonials']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "category_description SET category_id = '" . (int)$category_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', description = '" . $this->db->escape($value['description']) . "', identify_your_horse = '" . $this->db->escape($value['identify_your_horse']) . "', size_and_measure = '" . $this->db->escape($value['size_and_measure']) . "', benefits = '" . $this->db->escape($value['benefits']) . "', fitting_chart = '" . $this->db->escape($value['fitting_chart']) . "', video = '" . $this->db->escape($value['video']) . "', testimonials = '" . $this->db->escape($value['testimonials']) . "'");
 		}
 		
 		// MySQL Hierarchical Data Closure Table Pattern
@@ -244,6 +244,7 @@ class ModelCatalogCategory extends Model {
 				'identify_your_horse'      => $result['identify_your_horse'],
 				'size_and_measure'      => $result['size_and_measure'],
 				'benefits'      => $result['benefits'],
+				'video'      => $result['video'],
 				'fitting_chart'      => $result['fitting_chart'],
 				'testimonials'      => $result['testimonials']
 			);

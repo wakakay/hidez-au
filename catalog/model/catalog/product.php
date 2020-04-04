@@ -20,6 +20,10 @@ class ModelCatalogProduct extends Model {
         LEFT JOIN " . DB_PREFIX . "category c ON (ptc.category_id = c.category_id)
         LEFT JOIN " . DB_PREFIX . "category_description cd ON (cd.category_id = c.parent_id)
         WHERE ptc.product_id = '" . (int)$product_id . "' AND c.parent_id) cdd ON (cdd.product_id = p.product_id)
+        LEFT JOIN (SELECT ptc.product_id, cd.video
+        FROM " . DB_PREFIX . "product_to_category ptc
+        LEFT JOIN " . DB_PREFIX . "category_description cd ON (cd.category_id = ptc.category_id)
+        WHERE ptc.product_id = '" . (int)$product_id . "') cdd2 ON (cdd2.product_id = p.product_id)
 		WHERE p.product_id = '" . (int)$product_id . "' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");
 
 		if ($query->num_rows) {
@@ -69,7 +73,8 @@ class ModelCatalogProduct extends Model {
 				'viewed'           => $query->row['viewed'],
 				'identify_your_horse'  => $query->row['identify_your_horse'],
 				'size_and_measure'     => $query->row['size_and_measure'],
-				'fitting_chart'        => $query->row['fitting_chart']
+				'fitting_chart'        => $query->row['fitting_chart'],
+				'video'        => $query->row['video']
 			);
 		} else {
 			return false;

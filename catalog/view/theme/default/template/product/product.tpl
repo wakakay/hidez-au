@@ -1,14 +1,6 @@
 <?php echo $header; ?>
 <div id="content" class="product">
     <?php echo $content_top; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-    <script>
-      function getScroll() {
-        var top = $('#moduleTabs').offset().top - 100
-        $('body,html').animate({
-          scrollTop: top
-        }, 200);
-      }
-    </script>
     <div class="breadcrumb">
         <?php foreach ($breadcrumbs as $breadcrumb) { ?>
         <?php echo $breadcrumb['separator']; ?><a
@@ -17,7 +9,7 @@
         <span><a onclick="javascript:history.go(-1);return false;">back level</a></span>
     </div>
 
-    <h1><?php echo $heading_title; ?><a href="javascript:;" onClick="getScroll()">MORE IMAGES </a></h1>
+    <h1><?php echo $heading_title; ?></h1>
 
     <div class="product-info">
         <?php if ($thumb || $images) { ?>
@@ -334,7 +326,7 @@
         <div id="tab-benefit" class="tab-content"><?php echo $benefit; ?></div>
         <div id="tab-fitting-chart" class="tab-content"><?php echo $fitting_chart; ?></div>
         <div id="tab-testimonial" class="tab-content"><?php echo $testimonial; ?></div>
-        <div id="tab-description" class="tab-content"><?php echo $description; ?></div>
+        <div id="tab-description" class="tab-content"><?php echo $description; ?><?php echo $video; ?></div>
     </div>
 
     <?php if ($attribute_groups) { ?>

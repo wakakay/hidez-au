@@ -94,6 +94,15 @@
                     </textarea>
                     </td>
                 </tr>
+                <tr>
+                    <td><?php echo $entry_video; ?></td>
+                    <td>
+                        <textarea name="category_description[<?php echo $language['language_id']; ?>][video]"
+                                  id="video<?php echo $language['language_id']; ?>">
+                        <?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['video'] : ''; ?>
+                    </textarea>
+                    </td>
+                </tr>
             </table>
           </div>
           <?php } ?>
@@ -288,6 +297,15 @@ CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
   });
 
   CKEDITOR.replace('testimonials<?php echo $language['language_id']; ?>', {
+    filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
+  });
+
+  CKEDITOR.replace('video<?php echo $language['language_id']; ?>', {
     filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
     filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
     filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',

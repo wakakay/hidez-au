@@ -649,6 +649,7 @@ a.backToTop:hover{background-position:0 -48px;}
 .ui-video{width:960px;margin:0 auto;border:1px solid #ccc;}
 .ui-video video{width:960px;}
 .size-table{margin:0 10px 20px;}
+.size-table .ui-video{margin-top:10px;}
 .size-table .ui-content{padding:20px 0;}
 .size-table .ui-content .ui-text{width:460px;padding:10px;}
 .size-table .ui-content .ui-text h3{padding-bottom:20px;font-size:18px;color:#fff100;text-align:left;letter-spacing:1px;}
