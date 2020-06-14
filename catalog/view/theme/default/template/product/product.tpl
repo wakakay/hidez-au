@@ -296,11 +296,11 @@
     </div>
 
     <div id="moduleTabs" class="ui-tabs-title">
-        <?php if (!!$identify_your_horse) { ?>
-         <a data-tab="tab-identify-your-horse"><?php echo $tab_identify_your_horse; ?></a>
-        <?php } ?>
         <?php if (!!$size_and_measure) { ?>
         <a data-tab="tab-size-and-measure"><?php echo $tab_size_and_measure; ?></a>
+        <?php } ?>
+        <?php if (!!$identify_your_horse) { ?>
+        <a data-tab="tab-identify-your-horse"><?php echo $tab_identify_your_horse; ?></a>
         <?php } ?>
         <a data-tab="tab-benefit"><?php echo $tab_benefit; ?></a>
         <a data-tab="tab-fitting-chart"><?php echo $tab_fitting_chart; ?></a>
@@ -317,11 +317,11 @@
         <?php } ?>-->
     </div>
     <div class="ui-tabs-content">
-        <?php if (!!$identify_your_horse) { ?>
-        <div id="tab-identify-your-horse" class="tab-content"><?php echo $identify_your_horse; ?></div>
-        <?php } ?>
         <?php if (!!$size_and_measure) { ?>
         <div id="tab-size-and-measure" class="tab-content"><?php echo $size_and_measure; ?></div>
+        <?php } ?>
+        <?php if (!!$identify_your_horse) { ?>
+        <div id="tab-identify-your-horse" class="tab-content"><?php echo $identify_your_horse; ?></div>
         <?php } ?>
         <div id="tab-benefit" class="tab-content"><?php echo $benefit; ?></div>
         <div id="tab-fitting-chart" class="tab-content"><?php echo $fitting_chart; ?></div>

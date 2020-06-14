@@ -30,24 +30,29 @@
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
         <div class="content">
           <p><?php echo $text_i_am_returning_customer; ?></p>
-          <!--b><?php echo $entry_email; ?></b><br />
-          <input type="text" name="email" value="<?php echo $email; ?>" />
-          <br />
-          <br /-->
-          <input type="text" name="email" placeholder="<?php echo $entry_email; ?>" class="signup_name" >
-          <input type="password" name="password" placeholder="<?php echo $entry_password; ?>" class="signup_password">
-          <div class="log_res">
+
+          <div class="ui-item" flex="dir:left cross:center show:visible">
+            <label><?php echo $entry_email; ?></label>
+            <div class="ui-input">
+            <input type="text" name="email" placeholder="<?php echo $entry_email; ?>" class="signup_name" />
+            </div>
+          </div>
+          <div class="ui-item" flex="dir:left cross:center show:visible">
+            <label><?php echo $entry_password; ?></label>
+            <div class="ui-input">
+              <input type="password" name="password" placeholder="<?php echo $entry_password; ?>" class="signup_password" />
+              <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a>
+            </div>
+          </div>
+
+          <div class="log_res" flex="main:justify cross:center">
             <input type="submit" name="submit" value="<?php echo $button_login; ?>" class="login-btn" title="<?php echo $button_login; ?>"/>
             <?php if ($redirect) { ?>
-           <input type="hidden" name="submit" value="<?php echo $redirect; ?>"class="login-btn" title="<?php echo $button_login; ?>" />
-          <?php } ?>
-            <div class="res-btn"><a href="<?php echo $register; ?>">Registe</a></div></div>
+            <input type="hidden" name="submit" value="<?php echo $redirect; ?>"class="login-btn" title="<?php echo $button_login; ?>" />
+            <?php } ?>
+            <div class="res-btn"><a href="<?php echo $register; ?>">Registe</a>
+            </div>
           </div>
-          <!--b><?php echo $entry_password; ?></b><br />
-          <input type="password" name="password" value="<?php echo $password; ?>" />
-          <br />
-          <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a><br />
-          <br /-->
         </div>
       </form>
   </div>

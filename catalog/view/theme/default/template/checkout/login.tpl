@@ -25,18 +25,21 @@
   <br />
   <br />
 </div>
-<div id="login" class="right">
+<div id="login" class="right ui-login-form">
   <h2><?php echo $text_returning_customer; ?></h2>
   <p><?php echo $text_i_am_returning_customer; ?></p>
-  <b><?php echo $entry_email; ?></b><br />
-  <input type="text" name="email" value="" />
-  <br />
-  <br />
-  <b><?php echo $entry_password; ?></b><br />
-  <input type="password" name="password" value="" />
-  <br />
-  <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a><br />
-  <br />
-  <input type="button" value="<?php echo $button_login; ?>" id="button-login" class="button" /><br />
-  <br />
+
+  <div class="ui-item" flex="dir:left cross:center">
+    <label><?php echo $entry_email; ?></label>
+    <input type="text" name="email" value="" />
+  </div>
+  <div class="ui-item" flex="dir:left cross:center">
+    <label><?php echo $entry_password; ?></label>
+    <input type="password" name="password" value="" />
+  </div>
+
+  <div class="ui-item cell-button" flex="main:justify cross:center">
+    <input type="button" value="<?php echo $button_login; ?>" id="button-login" class="button" />
+    <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a>
+  </div>
 </div>
