@@ -65,7 +65,19 @@
             return
           }
 
-          !isPcFlag && $thumbs.is(':hidden') ? $thumbs.show() : $thumbs.hide()
+          if (!isPcFlag) {
+            if ($thumbs.is(':hidden')) {
+              $thumbs.show().parents('.ui-item').siblings().find('.category-thumbs').hide()
+            } else {
+              $thumbs.hide().parents('.ui-item').siblings().find('.category-thumbs').show()
+            }
+          }
+        })
+
+        $('.category-thumbs a').click(function(event) {
+          event.preventDefault()
+          event.stopPropagation()
+          window.open($(this).attr('href'))
         })
       })
     </script>
