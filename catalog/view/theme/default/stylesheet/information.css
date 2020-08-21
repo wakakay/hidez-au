@@ -1,10 +1,12 @@
 .ae-grid{width:1000px;margin:0 auto;position:relative;clear:both;}
-.ae-grid .ui-bubba{position:relative;float:left;overflow:hidden;margin:10px;min-width:320px;max-width:480px;max-height:360px;width:48%;height:auto;background:#3085a3;text-align:center;cursor:pointer;}
+.ae-grid table{margin:0 auto;}
+.ae-grid table th, .ae-grid table td{word-break: break-all; word-wrap:break-word;}
+.ae-grid .ui-bubba{position:relative;overflow:hidden;margin:10px;min-width:320px;max-width:336px;max-height:252px;height:auto;background:#3085a3;text-align:center;cursor:pointer;}
 .ae-grid .ui-bubba .ui-fig{color:#fff;text-transform:uppercase;font-size:1.25em;-webkit-backface-visibility:hidden;backface-visibility:hidden;}
 .ae-grid .ui-bubba .ui-fig::before,.ae-grid .ui-bubba .ui-fig::after{pointer-events:none;}
 .ae-grid .ui-bubba .ui-fig,.ae-grid .ui-bubba .ui-fig>a{position:absolute;top:0;left:0;width:100%;height:100%;}
 .ae-grid .ui-bubba{background:#6b7343;}
-.ae-grid .ui-bubba img{width:480px;height:360px;opacity:.9;-webkit-transition:opacity .35s;transition:opacity .35s;}
+.ae-grid .ui-bubba img{width:336px;height:252px;opacity:.9;-webkit-transition:opacity .35s;transition:opacity .35s;}
 .ae-grid .ui-bubba:hover img{opacity:.6;}
 .ae-grid .ui-bubba .ui-fig::before, .ae-grid .ui-bubba .ui-fig::after{position:absolute;top:30px;right:30px;bottom:30px;left:30px;content:'';opacity:0;-webkit-transition:opacity .35s,-webkit-transform .35s;transition:opacity .35s,transform .35s;}
 .ae-grid .ui-bubba .ui-fig::before{border-top:1px solid #fff;border-bottom:1px solid #fff;-webkit-transform:scale(0,1);transform:scale(0,1);}
@@ -15,7 +17,7 @@
 
 .slider-box{width:100%;height:100%;background-color:#000;opacity:.8;position:fixed;top:0;left:0;z-index:500;display:none;}
 .slider-box .slider-close{display:block;width:70px;height:70px;background:url("../image/silder-close.png") no-repeat;position:fixed;right:0;top:0;z-index:550;}
-#slider{width:720px;height:540px;margin:-270px 0 0 -360px;background:url(images/loading.gif)no-repeat 50%50%;position:fixed !important;left:50%;top:50%;z-index:550;display:none;}
+#slider{width:720px;height:540px;margin:-270px 0 0 -252px;background:url(images/loading.gif)no-repeat 50%50%;position:fixed !important;left:50%;top:50%;z-index:550;display:none;}
 #slider img{position:absolute;top:0px;left:0px;display:none;}
 .nivo-controlNav{position:absolute;right:10px;bottom:0px;}
 .nivo-controlNav a{display:block;width:22px;height:22px;background:url("../image/bullets.png")no-repeat;text-indent:-9999px;border:0;margin-right:3px;float:left;}
