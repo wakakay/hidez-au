@@ -152,7 +152,7 @@
                             <li><a href="?route=information/information&information_id=28">Global Contact</a></li>
                             <li><a href="?route=information/information&information_id=29">Australian Contact</a></li>
                             <li><a href="?route=information/information&information_id=30">Sponsorship</a></li>
-                            <li><a href="?route=information/information&information_id=31">Warranty Claim Form</a></li>
+                            <!--<li><a href="?route=information/information&information_id=31">Warranty Claim Form</a></li>-->
                         </ul>
                     </li>
                 </ul>
