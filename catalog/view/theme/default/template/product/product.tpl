@@ -106,8 +106,7 @@
                     <?php if(count($option['option_parents'])){ ?>
 
                     <?php foreach ($option['option_parents'] as $v) {?>
-                    <ul
-                    <?php echo "data-parent='".$v."'"; ?>>
+                    <ul <?php echo "data-parent='".$v."'"; ?>>
                     <?php foreach ($option['option_value'] as $key=>$option_value) {
                     if($v == $option_value['option_parent']){
                     ?>
@@ -134,11 +133,13 @@
 
                     <ul>
                         <?php foreach ($option['option_value'] as $key=>$option_value) {?>
-                        <li>
+                        <li class="<?php echo count($option['option_value']) === 1 ? 'active' : ''; ?>">
                             <label for="option-value-<?php echo $option_value['product_option_value_id']; ?>">
-                                <input type="radio" name="option[<?php echo $option['product_option_id']; ?>]"
+                                <input type="radio"
+                                       name="option[<?php echo $option['product_option_id']; ?>]"
                                        value="<?php echo $option_value['product_option_value_id']; ?>"
-                                       id="option-value-<?php echo $option_value['product_option_value_id']; ?>"/>
+                                       id="option-value-<?php echo $option_value['product_option_value_id']; ?>"
+                                        <?php echo count($option['option_value']) === 1 ? 'checked="checked"' : ''; ?>/>
                                 <span><?php echo $option_value['name']!="-"?trim($option_value['name']):""; ?></span>
 
                                 <?php if ($option_value['price']){
