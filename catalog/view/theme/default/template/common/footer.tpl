@@ -58,22 +58,22 @@
     </div>
 </div>
 
-<!--<script type="text/javascript">
+<script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
 }
 </script>
 </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-&lt;!&ndash; Global site tag (gtag.js) - Google Analytics &ndash;&gt;
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124190346-1"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-45624805-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-124190346-1');
-</script>-->
+  gtag('config', 'UA-45624805-1');
+</script>
 
 </body>
 </html>

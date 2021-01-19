@@ -293,6 +293,9 @@
               </div>
             </div>
             <?php } ?>-->
+            <div class="ui-made-box">
+                All Hidez products are Hand Made in Sydney Australia
+            </div>
         </div>
     </div>
 

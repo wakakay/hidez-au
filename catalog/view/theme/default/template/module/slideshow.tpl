@@ -1,5 +1,3 @@
-
-
 <div id="wrapper" style="width:<?php echo $width; ?>px;">
   <div id="slider-wrapper">
 
