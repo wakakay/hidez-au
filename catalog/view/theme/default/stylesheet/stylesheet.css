@@ -212,7 +212,10 @@ label{cursor:pointer;}
 .mar_foot{margin:0 0 10px 0;}
 .box .box-heading, .box-heading{height:30px;font:bold 14px/30px '';color:white;text-align:center;background:#343434;}
 .box .account-heading{height:30px;font:bold 14px/30px '';color:white;text-align:center;background:red;}
-.lates-heading{background:url('../images/lates_tit.gif') no-repeat;height:72px;position:relative;}
+
+.lates-heading{background:url('../images/lates_tit.gif') no-repeat;height:86px;position:relative;}
+.lates-heading .ui-made-box{position:absolute;left:300px;padding-left:64px;padding-top:64px;color:#06967b;}
+.lates-heading .ui-made-box:before{content:'';display:block;width:64px;height:64px;background:url(../images/made-logo.png) no-repeat center center;background-size:contain;position:absolute;left:-18px;top:10px;}
 .lates-heading .cell-free-shipping{display:block;width:262px;height:41px;background:url('../images/free-shipping.png') no-repeat;position:absolute;right:0;bottom:-1px;}
 .featured-heading{}.box .box-content ul{padding:5px;}
 .box .box-content ul li{line-height:20px;}/* box products */.box-product{width:1024px;overflow:hidden;}

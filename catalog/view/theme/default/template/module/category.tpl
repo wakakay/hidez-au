@@ -1,8 +1,10 @@
 <div id="category">
     <div class="box">
       <div class="lates-heading">
-      <a href="javascript:void(0)" style="display:block; width:100%; height:72px;"></a>
-      <span class="cell-free-shipping"></span>
+          <div class="ui-made-box">
+              All Hidez products are Hand Made in Sydney Australia
+          </div>
+          <span class="cell-free-shipping"></span>
       </div>
       <div class="box-content">
 
