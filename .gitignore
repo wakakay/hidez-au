@@ -1,0 +1,14 @@
+.DS_Store
+image/
+system/cache/
+system/logs/
+error_log.log*
+image/*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
