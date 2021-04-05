@@ -61,6 +61,7 @@
             <div class="price">
                 <div class="total-price"><span><?php echo $text_price; ?></span>
                     <div class="cell-free-shopping"></div>
+                    <div class="ui-made-box">Made in Australia</div>
                     <?php if (!$special) { ?>
                     <?php echo $price; ?>
                     <?php } else { ?>
@@ -105,12 +106,11 @@
                     <?php if(count($option['option_parents'])){ ?>
 
                     <?php foreach ($option['option_parents'] as $v) {?>
-                    <ul
-                    <?php echo "data-parent='".$v."'"; ?>>
+                    <ul <?php echo "data-parent='".$v."'"; ?>>
                     <?php foreach ($option['option_value'] as $key=>$option_value) {
                     if($v == $option_value['option_parent']){
                     ?>
-                    <li>
+                    <li class="ui-radio">
                         <label for="option-value-<?php echo $option_value['product_option_value_id']; ?>">
                             <input type="radio" name="option[<?php echo $option['product_option_id']; ?>]"
                                    value="<?php echo $option_value['product_option_value_id']; ?>"
@@ -133,7 +133,7 @@
 
                     <ul>
                         <?php foreach ($option['option_value'] as $key=>$option_value) {?>
-                        <li class="<?php echo count($option['option_value']) === 1 ? 'active' : ''; ?>">
+                        <li class="ui-radio <?php echo count($option['option_value']) === 1 ? 'active' : ''; ?>">
                             <label for="option-value-<?php echo $option_value['product_option_value_id']; ?>">
                                 <input type="radio"
                                        name="option[<?php echo $option['product_option_id']; ?>]"
@@ -158,6 +158,40 @@
                 </div>
                 <?php } ?>
 
+                <?php if ($option['type'] == 'checkbox') { ?>
+                <div id="option-<?php echo $option['product_option_id']; ?>"
+                     class="option-item <?php echo $option['classname'];?>">
+                    <h4>
+                        <?php if ($option['required']) { ?><b
+                            class="required">*</b><?php } ?><?php echo $option['name']; ?>:
+                        <?php if ($option['explainhref']) { ?><a href="javascript:;"
+                                                                 data-href="<?php echo $option['explainhref']; ?>"><i></i><?php echo $option['explainname']; ?>
+                    </a><?php } ?>
+                    </h4>
+
+                    <ul>
+                        <?php foreach ($option['option_value'] as $key=>$option_value) {?>
+                        <li class="ui-checkbox">
+                            <label for="option-value-<?php echo $option_value['product_option_value_id']; ?>">
+                                <input type="checkbox"
+                                       name="option[<?php echo $option['product_option_id']; ?>]"
+                                       value="<?php echo $option_value['product_option_value_id']; ?>"
+                                       id="option-value-<?php echo $option_value['product_option_value_id']; ?>"/>
+                                <span><?php echo $option_value['name']!="-"?trim($option_value['name']):""; ?></span>
+
+                                <?php if ($option_value['price']){
+                        if ($option_value['name']=="-"){
+                          echo '<strong>'.$option_value['price'].'</strong>';
+                                }else{
+                                echo '<strong>(<b class="prefix">'.$option_value['price_prefix'].'</b>'.$option_value['price'].')</strong>';
+                                }
+                                }?>
+                            </label>
+                        </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+                <?php } ?>
 
                 <?php if ($option['type'] == 'textarea') { ?>
                 <div id="option-<?php echo $option['product_option_id']; ?>"
@@ -170,6 +204,7 @@
                               rows="2"><?php echo $option['option_value']; ?></textarea>
                 </div>
                 <?php } ?>
+
                 <?php } ?>
                 <script type="text/javascript"
                         src="catalog/view/javascript/jquery/amplification/jquery.zoombie.js"></script>
@@ -191,8 +226,8 @@
                       big && $('.product-info .image').find('img').attr('src', big);
                     });
 
-                    var $optionItem = $(".product-info .option-item"),
-                      $optionItemLi = $(".product-info .option-item li");
+                    var $optionItem = $(".product-info .option-item");
+                    var $optionItemLi = $(".product-info .option-item li");
                     var $scope = $(".product-info .total-price .scope");
                     var $totalPrice = $(".product-info .total-price .money");
                     var defaultPriceArray = [];
@@ -202,8 +237,8 @@
                       defaultPriceArray.push(number);
                     });
 
-                    var $totalPrice = $(".product-info .total-price .money"),
-                      defaultPrice = parseFloat($totalPrice.html());
+                    var $totalPrice = $(".product-info .total-price .money");
+                    var defaultPrice = parseFloat($totalPrice.html());
                     var addPrice = function () {
                       var reTotal = 0;
                       $optionItemLi.each(function () {
@@ -225,14 +260,24 @@
                       });
                     }
                     var equineType = ''; // equine类型
-                    $optionItemLi.on("click", function () {
+                    $optionItemLi.on("click", function (event) {
+                        event.stopPropagation()
                       var $this = $(this);
+                      var isCheckbox = $this.hasClass('ui-checkbox')
+
                       if ($scope.length) {
                         $scope.remove();
                       }
-                      var parents = $this.parents(".option-item")
-                      parents.find("li").removeClass("active");
-                      $this.addClass("active");
+
+                      if (!isCheckbox) {
+                          var parents = $this.parents(".option-item")
+                          parents.find("li").removeClass("active");
+                          $this.addClass("active");
+                      } else {
+                          var isSelected = $(this).find('input').is(":checked")
+                          isSelected ?  $this.addClass("active") :  $this.removeClass("active")
+                      }
+
                       addPrice();
 
                       var index = toOptionNameMap[$(this).find('span').text()]
@@ -298,9 +343,6 @@
               </div>
             </div>
             <?php } ?>-->
-            <div class="ui-made-box">
-                All Hidez products are Hand Made in Sydney Australia
-            </div>
         </div>
     </div>
 

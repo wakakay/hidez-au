@@ -354,7 +354,9 @@ label{cursor:pointer;}
 .product-info .option-item{padding-bottom:5px;clear:both;overflow:hidden;}
 .product-info .option-item ul{display:none;}
 .product-info .option-item h4+ul{display:block;}
-.product-info .option-item li{width:192px;height:26px;float:left;margin:2px 0 2px 2px;margin:3px 5px 3px 0px\9;font:normal 13px/26px '';display:block;background:#028a02;border:2px solid #032903;}
+.product-info .option-item li{width:192px;height:26px;float:left;margin:2px 0 2px 2px;margin:3px 5px 3px 0px\9;font:normal 13px/26px '';display:block;background:#028a02;border:2px solid #032903;user-select:none;}
+.product-info .option-item li.ui-checkbox{background-color:#e6792a;}
+.product-info .option-item li.ui-checkbox.active {background-color:#ed6a0c;}
 .product-info .option-item li label{display:block;height:100%;padding:0 5px;font-size:13px;font-weight:bold;color:#fff;position:relative;overflow:hidden;}
 .product-info .option-item li label input{margin-top:5px;position:absolute;left:-100px;top:-100px;}
 .product-info .option-item li label strong{visibility:hidden;}
@@ -377,8 +379,8 @@ label{cursor:pointer;}
 .product-info .review > div > span{color:white;}
 .product-info .review .share{overflow:auto;line-height:normal;}
 .product-info .review .share a{text-decoration:none;}
-.product-info .ui-made-box{position:relative;margin-left:6px;padding-left:66px;font-size:14px;font-weight:400;line-height:60px;color:#06967b;}
-.product-info .ui-made-box:before{content:'';display:block;width:60px;height:60px;background:url(../images/made-logo.png) no-repeat center center;background-size:contain;position:absolute;left:0;top:0;}
+.product-info .ui-made-box{margin-left:6px;padding-left:40px;font-size:14px;font-weight:400;line-height:34px;color:#06967b;position:absolute;right:95px;top:2px;}
+.product-info .ui-made-box:before{content:'';display:block;width:34px;height:34px;background:url(../images/made-logo.png) no-repeat center center;background-size:contain;position:absolute;left:0;top:0;}
 
 .review-list{padding:10px;overflow:auto;margin-bottom:20px;border:1px solid #454545;}
 .review-list .author{float:left;margin-bottom:20px;}

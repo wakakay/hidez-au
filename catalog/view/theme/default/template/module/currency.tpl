@@ -31,7 +31,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         if ($("#currency_code").val() === 'USD') {
-            window.location.replace('https://%77%77%77%2E%68%69%64%65%7A%2E%63%6F%6D/');
+            window.location.replace('https://www.hidez.com/');
         }
         $("#currency_code").change(function () {
             if ($("#currency_code").val() !== 'USD') {
@@ -39,7 +39,7 @@
                 return false;
             }
 
-            window.location.replace('https://%77%77%77%2E%68%69%64%65%7A%2E%63%6F%6D/');
+            window.location.replace('https://www.hidez.com/');
         });
     });
 </script>
