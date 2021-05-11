@@ -28,8 +28,8 @@
           <tr>
             <td class="image"><?php echo $column_image; ?></td>
             <td class="name"><?php echo $column_name; ?></td>
-            <td class="model"><?php echo $column_model; ?></td>
-            <td class="quantity"><?php echo $column_quantity; ?></td>
+            <td class="model" width="140"><?php echo $column_model; ?></td>
+            <td class="quantity" width="100"><?php echo $column_quantity; ?></td>
             <td class="price"><?php echo $column_price; ?></td>
             <td class="total"><?php echo $column_total; ?></td>
           </tr>
@@ -38,7 +38,8 @@
           <?php foreach ($products as $product) { ?>
           <tr>
             <td class="image"><?php if ($product['thumb']) { ?>
-              <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
+              <a href="<?php echo $product['href']; ?>">
+                <img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" width="140" height="109" /></a>
               <?php } ?></td>
             <td class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
               <?php if (!$product['stock']) { ?>
@@ -46,7 +47,15 @@
               <?php } ?>
               <div>
                 <?php foreach ($product['option'] as $option) { ?>
-                - <small><?php echo strpos($option['name'], 'FREE') === false ? $option['name'] : 'BUY ONE GET ONE FREE'; ?>: <?php echo $option['value']; ?></small><br />
+
+                  <?php if ($option['type'] != 'file') { ?>
+                  - <small><?php echo strpos($option['name'], 'FREE') === false ? $option['name'] : 'BUY ONE GET ONE FREE'; ?>: <?php echo $option['value']; ?></small><br />
+                  </small>
+                  <?php } else { ?>
+                  - <small><?php echo strpos($option['name'], 'FREE') === false ? $option['name'] : 'BUY ONE GET ONE FREE'; ?>:
+                <a target="_blank" href="<?php echo $option['filename']; ?>"><?php echo $option['value']; ?></a></small><br/>
+                  <?php } ?>
+
                 <?php } ?>
               </div>
               <?php if ($product['reward']) { ?>

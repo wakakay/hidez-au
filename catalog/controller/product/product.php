@@ -284,6 +284,12 @@ class ControllerProductProduct extends Controller {
 			$this->data['reward'] = $product_info['reward'];
 			$this->data['points'] = $product_info['points'];
 
+			if(!strpos($product_info['model'], 'ORIGINAL')){
+                $this->data['isOriginal'] = 1;
+            } else {
+                $this->data['isOriginal'] = 0;
+            }
+
 			/*if ($product_info['quantity'] <= 0) {
 				$this->data['stock'] = $product_info['stock_status'];
 			} elseif ($this->config->get('config_stock_display')) {
@@ -676,10 +682,14 @@ class ControllerProductProduct extends Controller {
 	public function upload() {
 		$this->language->load('product/product');
 		$json = array();
-		
+
 		if (!empty($this->request->files['file']['name'])) {
 			$filename = basename(preg_replace('/[^a-zA-Z0-9\.\-\s+]/', '', html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8')));
-			
+
+            if ($filename == 'blob') {
+                $filename = 'CUSTOMISED.png';
+            }
+
 			if ((utf8_strlen($filename) < 3) || (utf8_strlen($filename) > 64)) {
         		$json['error'] = $this->language->get('error_filename');
 			}	  	
@@ -692,7 +702,7 @@ class ControllerProductProduct extends Controller {
 			foreach ($filetypes as $filetype) {
 				$allowed[] = trim($filetype);
 			}
-			
+
 			if (!in_array(substr(strrchr($filename, '.'), 1), $allowed)) {
 				$json['error'] = $this->language->get('error_filetype');
        		}	
@@ -716,7 +726,7 @@ class ControllerProductProduct extends Controller {
 		} else {
 			$json['error'] = $this->language->get('error_upload');
 		}
-		
+
 		if (!$json && is_uploaded_file($this->request->files['file']['tmp_name']) && file_exists($this->request->files['file']['tmp_name'])) {
 			$file = basename($filename) . '.' . md5(mt_rand());
 			
@@ -726,7 +736,7 @@ class ControllerProductProduct extends Controller {
 			move_uploaded_file($this->request->files['file']['tmp_name'], DIR_DOWNLOAD . $file);
 						
 			$json['success'] = $this->language->get('text_upload');
-		}	
+		}
 		
 		$this->response->setOutput(json_encode($json));		
 	}

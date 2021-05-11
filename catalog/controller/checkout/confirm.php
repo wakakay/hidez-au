@@ -342,25 +342,31 @@ class ControllerCheckoutConfirm extends Controller {
 				$option_data = array();
 	
 				foreach ($product['option'] as $option) {
-					if ($option['type'] != 'file') {
-						$value = $option['option_value'];	
-					} else {
-						$filename = $this->encryption->decrypt($option['option_value']);
-						
-						$value = utf8_substr($filename, 0, utf8_strrpos($filename, '.'));
-					}
-										
-					$option_data[] = array(
-						'name'  => $option['name'],
-						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
-					);
-				}  
+                    if ($option['type'] != 'file') {
+                        $value = $option['option_value'];
+                        $filename  = '';
+                    } else {
+                       $value = $this->encryption->decrypt($option['option_value']);
+                       $filename = 'download/' . $value;
+                       $value = utf8_substr($value, 0, utf8_strrpos($value, '.'));
+                       if ($option['option_id'] == 35) {
+                          $image = $filename;
+                       }
+                    }
+
+                    $option_data[] = array(
+                        'name'  => $option['name'],
+                        'value' => utf8_substr($filename, 0, utf8_strrpos($filename, '.')),
+                        'filename' => $filename,
+                        'type' => $option['type']
+                    );
+                }
 				
 				if ($product['image']) {
-					$image = $this->model_tool_image->resize($product['image'], $this->config->get('config_image_cart_width'), $this->config->get('config_image_cart_height'));
-				} else {
-					$image = '';
-				}
+                    $image = $image ? $image : $this->model_tool_image->resize($product['image'], $this->config->get('config_image_cart_width'), $this->config->get('config_image_cart_height'));
+                } else {
+                    $image = '';
+                }
 	 
 				$this->data['products'][] = array(
 					'product_id' => $product['product_id'],

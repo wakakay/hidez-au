@@ -40,7 +40,7 @@ class ControllerProductCategory extends Controller {
 
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-					'href'      => $this->url->link('common/home'),
+			'href'      => $this->url->link('common/home'),
        		'separator' => false
    		);	
 			
@@ -64,20 +64,20 @@ class ControllerProductCategory extends Controller {
 			$parts = explode('_', (string)$this->request->get['path']);
 		
 			$category_id = (int)array_pop($parts);
-		
+
 			foreach ($parts as $path_id) {
 				if (!$path) {
 					$path = (int)$path_id;
 				} else {
 					$path .= '_' . (int)$path_id;
 				}
-									
+
 				$category_info = $this->model_catalog_category->getCategory($path_id);
 				
 				if ($category_info) {
 	       			$this->data['breadcrumbs'][] = array(
    	    				'text'      => $category_info['name'],
-								'href'      => $this->url->link('product/category', 'path=' . $path . $url),
+						'href'      => $this->url->link('product/category', 'path=' . $path . $url),
         				'separator' => $this->language->get('text_separator')
         			);
 				}
@@ -172,7 +172,7 @@ class ControllerProductCategory extends Controller {
 			$this->data['categories'] = array();
 			
 			$results = $this->model_catalog_category->getCategories($category_id);
-			
+
 			foreach ($results as $result) {
 				$data = array(
 					'filter_category_id'  => $result['category_id'],
@@ -200,7 +200,7 @@ class ControllerProductCategory extends Controller {
 			);
 					
 			$product_total = $this->model_catalog_product->getTotalProducts($data); 
-			
+
 			$results = $this->model_catalog_product->getProducts($data);
 			
 			foreach ($results as $result) {

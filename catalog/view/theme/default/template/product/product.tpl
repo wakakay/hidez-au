@@ -95,12 +95,16 @@
                 <div id="option-<?php echo $option['product_option_id']; ?>"
                      class="option-item <?php echo $option['classname'];?>">
 
-                    <h4>
-                        <?php if ($option['required']) { ?><b
-                            class="required">*</b><?php } ?><?php echo $option['name']; ?>:
-                        <?php if ($option['explainhref']) { ?><a href="javascript:;"
-                                                                 data-href="<?php echo $option['explainhref']; ?>"><i></i><?php echo $option['explainname']; ?>
-                    </a><?php } ?>
+                    <h4 flex="main:justify">
+                        <span>
+                            <?php if ($option['required']) { ?><b class="required">*</b><?php } ?>
+                            <?php echo $option['name']; ?>:
+                        </span>
+                        <?php if ($option['explainhref']) { ?>
+                            <a href="javascript:;" data-href="<?php echo $option['explainhref']; ?>"><i></i><?php echo $option['explainname']; ?></a>
+                        <?php } else if ($option['explainname']) {?>
+                            <span><?php echo $isOriginal == 1 ? $option['explainname'] : ''; ?></span>
+                        <?php } ?>
                     </h4>
 
                     <?php if(count($option['option_parents'])){ ?>
@@ -205,7 +209,29 @@
                 </div>
                 <?php } ?>
 
+                <?php if ($option['type'] == 'file') { ?>
+                    <?php if ($option['classname'] == 'ui-image-filed') {?>
+                        <div id="option-<?php echo $option['product_option_id']; ?>"
+                             class="option-item <?php echo $option['classname'];?>">
+                            <input type="hidden" name="option[<?php echo $option['product_option_id']; ?>]" value="" />
+                        </div>
+                    <?php }else{ ?>
+                        <div id="option-<?php echo $option['product_option_id']; ?>"
+                             class="option-item <?php echo $option['classname'];?>">
+                            <h4>
+                                <?php if ($option['required']) { ?><b class="required">*</b><?php } ?><?php echo $option['name']; ?>:
+                            </h4>
+                            <!-- <input type="button" value="<?php echo $button_upload; ?>" id="button-option-<?php echo $option['product_option_id']; ?>" class="button">-->
+                            <input type="hidden" name="option[<?php echo $option['product_option_id']; ?>]" value="" />
+
+                            <input type="button" class="button" value="DESIGN" id="openCanvas" data-id="option[<?php echo $option['product_option_id']; ?>]" />
+                        </div>
+                    <?php } ?>
+
                 <?php } ?>
+
+                <?php } ?>
+
                 <script type="text/javascript"
                         src="catalog/view/javascript/jquery/amplification/jquery.zoombie.js"></script>
                 <script type="text/javascript">
@@ -293,7 +319,7 @@
                         }
                       })
 
-                      if (parents[0].className.indexOf('product-type') !== -1) {
+                      if (parents && parents[0].className.indexOf('product-type') !== -1) {
                         equineType = T.replace(/\s*/g, '').toLowerCase();
                       }
                     });
@@ -484,91 +510,59 @@
     <?php echo $content_bottom; ?></div>
 
 <script type="text/javascript">
-  $('#button-cart').bind('click', function () {
-    $.ajax({
-      url: 'index.php?route=checkout/cart/add',
-      type: 'post',
-      data: $('.product-info input[type=\'text\'], .product-info input[type=\'hidden\'], .product-info input[type=\'radio\']:checked, .product-info input[type=\'checkbox\']:checked, .product-info select, .product-info textarea'),
-      dataType: 'json',
-      success: function (json) {
-        console.log(json)
-        $('.success, .warning, .attention, information, .error').remove();
+    function addCart() {
+      $.ajax({
+        url: 'index.php?route=checkout/cart/add',
+        type: 'post',
+        data: $('.product-info input[type=\'text\'], .product-info input[type=\'hidden\'], .product-info input[type=\'radio\']:checked, .product-info input[type=\'checkbox\']:checked, .product-info select, .product-info textarea'),
+        dataType: 'json',
+        success: function (json) {
+          $('.success, .warning, .attention, information, .error').remove();
 
-        if (json['error']) {
-          if (json['error']['option']) {
-            for (i in json['error']['option']) {
-              $('#option-' + i).append('<span class="error">' + json['error']['option'][i] + '</span>');
+          if (json['error']) {
+            if (json['error']['option']) {
+              for (i in json['error']['option']) {
+                $('#option-' + i).append('<span class="error">' + json['error']['option'][i] + '</span>');
+              }
             }
           }
-        }
 
-        if (json['success']) {
-          $('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
-          $('.success').fadeIn('slow');
-          $('.cart-total-content').html(json['total'] + json['totalItem']);
-          $('html, body').animate({scrollTop: 0}, 'slow');
-        }
-      }
-    });
+          if (json['success']) {
+            $('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+            $('.success').fadeIn('slow');
+            $('.cart-total-content').html(json['total'] + json['totalItem']);
+            $('html, body').animate({scrollTop: 0}, 'slow');
+          }
+        },
+        complete: function () {
+          $('#button-cart').attr('disabled', false)
+          $('.attention').remove();
+        },
+      });
+    }
+  $('#button-cart').bind('click', function () {
+    if (typeof uploadImages === 'undefined') {
+      addCart();
+      return
+    }
+    $(this).attr('disabled', true).after('<div class="attention"><img src="catalog/view/theme/default/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
+
+    if (!Object.keys(uploadImages).length) {
+      addCart();
+      return
+    }
+
+    filedUpload();
   });
 </script>
 <?php if ($options) { ?>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ajaxupload.js"></script>
 <?php foreach ($options as $option) { ?>
-<?php if ($option['type'] == 'file') { ?>
-<script type="text/javascript"><!--
-new AjaxUpload('#button-option-<?php echo $option['
-product_option_id
-']; ?>', {
-  action: 'index.php?route=product/product/upload',
-  name: 'file',
-  autoSubmit: true,
-  responseType: 'json',
-  onSubmit: function (file, extension) {
-    $('#button-option-<?php echo $option['
-    product_option_id
-    ']; ?>'
-  ).
-    after('<img src="catalog/view/theme/default/image/loading.gif" class="loading" style="padding-left: 5px;" />');
-    $('#button-option-<?php echo $option['
-    product_option_id
-    ']; ?>'
-  ).
-    attr('disabled', true);
-  },
-  onComplete: function (file, json) {
-    $('#button-option-<?php echo $option['
-    product_option_id
-    ']; ?>'
-  ).
-    attr('disabled', false);
 
-    $('.error').remove();
+<?php if ($option['type'] == 'file' && $option['classname'] == 'ui-file') { ?>
+<script type="text/javascript" src="catalog/view/javascript/DragImg.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/canvas.js?<?php echo $_SERVER['REQUEST_TIME']; ?>"></script>
 
-    if (json['success']) {
-      alert(json['success']);
-
-      $('input[name=\'option[<?php echo $option['
-      product_option_id
-      ']; ?>]\']'
-    ).
-      attr('value', json['file']);
-    }
-
-    if (json['error']) {
-      $('#option-<?php echo $option['
-      product_option_id
-      ']; ?>'
-    ).
-      append('<span class="error">' + json['error'] + '</span>');
-    }
-
-    $('.loading').remove();
-  }
-}
-)
-;
-//--></script>
 <?php } ?>
 <?php } ?>
 <?php } ?>

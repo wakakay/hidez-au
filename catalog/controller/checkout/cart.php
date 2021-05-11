@@ -205,15 +205,21 @@ class ControllerCheckoutCart extends Controller {
         		foreach ($product['option'] as $option) {
 					if ($option['type'] != 'file') {
 						$value = $option['option_value'];
+						$filename  = '';
 					} else {
-						$filename = $this->encryption->decrypt($option['option_value']);
-
-						$value = utf8_substr($filename, 0, utf8_strrpos($filename, '.'));
+						$value = $this->encryption->decrypt($option['option_value']);
+						$filename = 'download/' . $value;
+						$value = utf8_substr($value, 0, utf8_strrpos($value, '.'));
+						if ($option['option_id'] == 35) {
+						   $image = $filename;
+						}
 					}
 
 					$option_data[] = array(
 						'name'  => $option['name'],
-						'value' => $value //(utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
+						'filename' => $filename,
+						'value' => $value, //(utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
+						'type' => $option['type']
 					);
         		}
 
@@ -502,6 +508,47 @@ class ControllerCheckoutCart extends Controller {
 			return false;
 		}
 	}
+
+	public function getProductCategory() {
+        $this->load->model('catalog/category');
+
+        $json = array();
+        $product_id = $this->request->post['productId'];
+        $results = $this->model_catalog_category->getProductCategory($product_id);
+
+        $path = "image/data/CUSTOMISED/".$results['parent_id'];
+
+        if( is_dir($path) ){
+            $dir =  scandir($path);
+            foreach ($dir as $value) {
+                $sub_path = $path .'/'.$value;
+                if ($value == '.' || $value == '..') {
+                    continue;
+                } else if (is_dir($sub_path)) {
+                    $dir2=  scandir($sub_path);
+
+                    foreach ($dir2 as $value2) {
+                         $sub_path2 = $sub_path .'/'.$value2;
+                        if ($value2 == '.' || $value2 == '..') {
+                            continue;
+                        } else {
+                            $json[] = array(
+                               'thumb'  => $sub_path2,
+                               'name' => substr($value2, 0, count($value2) - 5)
+                           );
+                        }
+                    }
+                } else {
+                   $json[] = array(
+                       'thumb'  => $sub_path,
+                       'name' => substr($value, 0, count($value) - 5)
+                   );
+               }
+           }
+        }
+
+        $this->response->setOutput(json_encode($json));
+    }
 
 	public function add() {
 		$this->language->load('checkout/cart');

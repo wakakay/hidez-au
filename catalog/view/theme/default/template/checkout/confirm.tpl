@@ -17,7 +17,7 @@
       	<td class="image">
         <?php if ($product['thumb']) { ?>
         	<a href="<?php echo $product['href']; ?>">
-          	<img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" />
+          	<img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" width="140" height="109"/>
         	</a>
         <?php } ?>
         </td>
@@ -25,9 +25,14 @@
         
         <td class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
           <?php foreach ($product['option'] as $option) { ?>
-          <br />
-          &nbsp;<small style="font-size:12px;"> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
-          <?php } ?></td>
+            <?php if ($option['type'] != 'file') { ?>
+            - <small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small><br />
+            <?php } else { ?>
+            - <small><?php echo $option['name']; ?>:
+              <a target="_blank" href="<?php echo $option['filename']; ?>"><?php echo $option['value']; ?></a></small><br/>
+            <?php } ?>
+          <?php } ?>
+        </td>
         <td class="model"><?php echo $product['model']; ?></td>
         <td class="quantity"><?php echo $product['quantity']; ?></td>
         <td class="price"><?php echo $product['price']; ?></td>
