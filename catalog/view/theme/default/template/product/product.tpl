@@ -561,7 +561,7 @@
 
 <?php if ($option['type'] == 'file' && $option['classname'] == 'ui-file') { ?>
 <script type="text/javascript" src="catalog/view/javascript/DragImg.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/canvas.js?<?php echo $_SERVER['REQUEST_TIME']; ?>"></script>
+<script type="text/javascript" src="catalog/view/javascript/canvas.js"></script>
 
 <?php } ?>
 <?php } ?>

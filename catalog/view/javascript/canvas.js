@@ -146,16 +146,11 @@ var handleSubmit = function () {
   //filedUpload();
   handleSave();
 };
-
+// 文件上传
 var handleUpload = function (event) {
   var fileObj = new FileReader();
   var file = event.files[0];
-  var key = file.size + file.name;
-
-  if (uploadImages[key]) {
-    alert("I've added it");
-    return
-  }
+  var key = generateUUID();
 
   uploadImages[key] = file; // 记录上传的文件
   fileObj.readAsDataURL(event.files[0]);
@@ -446,4 +441,15 @@ function throttle(fn, threshold) {
       fn.apply(context, args)
     }
   }
+}
+
+function generateUUID() {
+  var d = new Date().getTime();
+  var uuid = `xxxxxx4xxyxx`.replace(/[xy]/g, (str) => {
+    var r = (d + Math.random() * 8) % 16 | 0;
+    d = Math.floor(d/16);
+    return (str === 'x' ? r : (r&0x3|0x8)).toString(16)
+  });
+
+  return uuid
 }
