@@ -4,8 +4,8 @@ var message = null;
 var isCreat = false;
 var ctx = null;
 var ctxInfo = {
-  width: 768,
-  height: 595,
+  width: 645,
+  height: 500,
   left: 0,
   top: 0,
   backgroundImg: null
@@ -44,11 +44,18 @@ var getProduct = function (callback) {
 var renderThumbs = function (dom) {
   var HTML = '';
   for (var i = 0, len = data.length; i < len; i++) {
-    HTML += '<li><img src="' + data[i].thumb + '" title="' + data[i].name + '" width="70" height="54" /></li>'
-  }
-  (i);
+    var first = '';
+    if (i !== 0) {
+      first = '<li>'
+    } else {
+      first = '<li class="is-active">';
+    }
+    HTML += (first + '<img src="' + data[i].thumb + '" title="' + data[i].name + '" width="70" height="54" /></li>')
+  }(i);
 
   $('.module-canvas .ui-list ul').html(HTML);
+
+  getLoadThumb( data[0].thumb);
 };
 
 var renderList = function (dom) {
@@ -111,8 +118,12 @@ $('.module-canvas .ui-list li').live('click', function () {
   $(this).addClass('is-active').siblings().removeClass('is-active');
 
   var index = $(this).index();
+  getLoadThumb(data[index].thumb)
+});
+
+var getLoadThumb = function (src) {
   var img = new Image();
-  img.src = data[index].thumb;
+  img.src = src;
   img.onload = function() {
     img.width = ctxInfo.width;
     img.height = ctxInfo.height;
@@ -120,14 +131,15 @@ $('.module-canvas .ui-list li').live('click', function () {
     buttonStatus('submit', false);
     draw()
   }
-});
+};
 
+// 取消
 var handleCancel = function () {
   $('.module-canvas').hide();
   var canvas = document.getElementById('canvas');
   canvas && canvas.removeEventListener('mousedown', handleMousedown);
 };
-
+// 重置
 var handleReset = function () {
   dragArr = [];
   clickedkArr = [];
@@ -135,8 +147,9 @@ var handleReset = function () {
   initial = null;
   startTouch = null;
   draw();
+  buttonStatus('uploadFile', false)
 };
-
+// 提交
 var handleSubmit = function () {
   if (!dragArr.length) {
     alert('PLEASE UPLOAD LOGOS HERE(PNG)');
@@ -158,9 +171,13 @@ var handleUpload = function (event) {
   fileObj.onload = function(e) {
     picReduce(fileObj.result, function(img) {
       event.setAttribute("type", 'text');
-      var item = new DragImg(img, ctx);
+      var item = new DragImg(img, ctx, ctxInfo);
       item.place = false;
       item.key = key;
+      dragArr.forEach(function (data) {
+        data.level--
+      });
+      item.level = 3;
       dragArr.push(item);
 
       draw();
@@ -172,7 +189,7 @@ var handleUpload = function (event) {
     })
   }
 };
-
+// 转图片二进制流
 function b64ToUint8Array(b64Image) {
   var img = atob(b64Image.split(',')[1]);
   var img_buffer = [];
@@ -183,7 +200,6 @@ function b64ToUint8Array(b64Image) {
   }
   return new Uint8Array(img_buffer);
 }
-
 // 生成最新的拖拽图片
 function handleSave() {
   dragArr.forEach(function(item, index) {
@@ -211,7 +227,6 @@ function handleSave() {
 
   handleCancel();
 }
-
 // 上传的logo之类的图片
 function filedUpload() {
   queueFetch(0)
@@ -301,19 +316,33 @@ var handleMousedown = function (e) {
   clickedkArr = [];
   var x = e.clientX;
   var y = e.clientY;
+
   dragArr.forEach(function(item, index) {
-    var place = item.isInWhere(x - ctxInfo.left, y - ctxInfo.top);
+    var place = item.isInWhere(x, y, item.selected);
     item.place = place;
     item.index = index;
-    // 先将所有的item的selected变为flase
+    // 先将所有的item的selected变为false
     item.selected = false;
 
-    place && clickedkArr.push(item)
+    place && clickedkArr.push(item);
   });
+
   var length = clickedkArr.length;
   if (length) {
-    // 我们知道cavans绘制的图片的层级是越来越高的，因此我们取这个数组的最后一项，保证取到的图片实例是层级最高的
-    var lastImg = clickedkArr[length - 1];
+    // 我们知道cavans绘制的图片的层级是越来越高的，因此我们取这个数组的最后一项，保证取到的图片实例是层级最高的clickedkArr[length - 1];
+    const max = Math.max.apply(Math, clickedkArr.map((item, index) => {
+      return index
+    }));
+
+    var lastImg = clickedkArr[max];
+
+    lastImg.level = 3;
+    dragArr.forEach(function(item) {
+      if (lastImg.key !== item.key) {
+        item.level--;
+      }
+    });
+
     // 如果是删除的话就移除
     if (lastImg.place === 'del') {
       dragArr.splice(lastImg.index, 1);
@@ -325,8 +354,9 @@ var handleMousedown = function (e) {
     }
     // 将该实例的被选值设为true，下次重新绘制将绘制边框
     lastImg.selected = true;
+
     // 保存这个选中的实例
-    lastThumb = lastImg
+    lastThumb = lastImg;
     // 保存这个实例的初始值，以后会用上
     initial = {
       initialX: lastImg.x,
@@ -336,12 +366,13 @@ var handleMousedown = function (e) {
       initialRotate: lastImg.rotate
     }
   }
+
   // 重新绘制
   draw();
   // 保存点击的坐标，move时要用
   startTouch = {startX: x, startY: y};
 
-  document.onmousemove = throttle(handleMove, 10);
+  document.onmousemove = handleMove
 
   document.onmouseup = function(event) {
     document.onmousemove = null;
@@ -350,60 +381,65 @@ var handleMousedown = function (e) {
 };
 
 var handleMove = function (e) {
-  var x = e.clientX;
-  var y = e.clientY;
-  var initialX = initial.initialX
-  var initialY = initial.initialY
-  var startX = startTouch.startX;
-  var startY = startTouch.startY;
-  var lastImg = lastThumb;
-  if (clickedkArr.length) {
-    if (lastImg.place === 'move') {
-      // 算出移动后的xy坐标与点击时xy坐标的差（即平移量）与图片对象的初始坐标相加即可
-      lastImg.x = initialX + (x - startX)
-      lastImg.y = initialY + (y - startY)
-    }
-    if (lastImg.place === 'transform') {
-      var centerX = lastImg.centerX;
-      var centerY = lastImg.centerY;
-      // 旋转部分
-      var angleBefore = Math.atan2(startY - centerY, startX - centerX) / Math.PI * 180
-      var angleAfter = Math.atan2(y - centerY, x - centerX) / Math.PI * 180
-      // 旋转的角度
-      lastImg.rotate = initial.initialRotate + angleAfter - angleBefore
-      // 缩放部分
-      // 用勾股定理算出距离
-      var lineA = Math.sqrt(Math.pow(centerX - startX, 2) + Math.pow(centerY - startY, 2));
-      var lineB = Math.sqrt(Math.pow(centerX - x, 2) + Math.pow(centerY - y, 2));
-      var w = initial.initialW + (lineB - lineA);
-      // 由于是等比缩放，所以乘一个宽高比例。
-      var h = initial.initialH + (lineB - lineA) * (initial.initialH / initial.initialW);
-      // 定义最小宽高
-      lastImg.w = w <= 5 ? 5 : w;
-      lastImg.h = h <= 5 ? 5 : h;
-      if (w > 5 && h > 5) {
-        // 放大 或 缩小
-        lastImg.x = initialX - (lineB - lineA) / 2;
-        lastImg.y = initialY - (lineB - lineA) / 2;
-      }
-    }
-    draw()
+  const x = e.clientX;
+  const y = e.clientY;
+  const { initialX, initialY } = initial;
+  const { startX, startY } = startTouch;
+  const lastImg = lastThumb;
+  if (!clickedkArr.length) {
+    return
   }
+
+  if (lastThumb.place === 'move') {
+    // 算出移动后的xy坐标与点击时xy坐标的差（即平移量）与图片对象的初始坐标相加即可
+    lastImg.x = initialX + (x - startX);
+    lastImg.y = initialY + (y - startY);
+  }
+  if (lastImg.place === 'transform') {
+    const centerX = Math.ceil(lastImg.centerX);
+    const centerY = Math.ceil(lastImg.centerY);
+    // 旋转部分
+    const { initialRotate } = initial;
+    const angleBefore = Math.atan2(startY - centerY - ctxInfo.top, startX - centerX - ctxInfo.left) / Math.PI * 180;
+    const angleAfter = Math.atan2(y - centerY - ctxInfo.top, x - centerX - ctxInfo.left) / Math.PI * 180;
+    // 旋转的角度
+    lastImg.rotate = initialRotate + angleAfter - angleBefore;
+    // 缩放部分
+    const { initialH, initialW } = initial;
+    // 用勾股定理算出距离
+    const lineA = Math.sqrt(Math.pow(centerX - startX + ctxInfo.left, 2) + Math.pow(centerY - startY + ctxInfo.top, 2));
+    const lineB = Math.sqrt(Math.pow(centerX - x + ctxInfo.left, 2) + Math.pow(centerY - y + ctxInfo.top, 2));
+
+    const w = initialW + (lineB - lineA);
+    // 由于是等比缩放，所以乘一个宽高比例。
+    const h = initialH + (lineB - lineA) * (initialH / initialW);
+    // 定义最小宽高
+    lastImg.w = w <= 5 ? 5 : w;
+    lastImg.h = h <= 5 ? 5 : h;
+    if (w > 5 && h > 5) {
+      // 放大 或 缩小
+      lastImg.x = initialX - (lineB - lineA) / 2;
+      lastImg.y = initialY - (lineB - lineA) / 2;
+    }
+  }
+  draw()
 };
 
 // 画图区域
 var draw = function () {
   ctx.clearRect(0, 0, ctxInfo.width, ctxInfo.height);
   ctxInfo.backgroundImg && ctx.drawImage(ctxInfo.backgroundImg, 0, 0, ctxInfo.width, ctxInfo.height);
-  var list = dragArr.filter(function(item) {
-    return !item.place
+
+  var selectItem = null;
+  dragArr.forEach(function(item) {
+    if (item.selected) {
+      selectItem = item
+    } else {
+      item.paint();
+    }
   });
 
-  list.forEach(function(item) {
-    return item.paint();
-  });
-
-  lastThumb && lastThumb.paint()
+  selectItem && selectItem.paint()
 };
 
 /**
