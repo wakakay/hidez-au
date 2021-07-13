@@ -201,7 +201,6 @@ class ControllerCheckoutCart extends Controller {
 				}
 
 				$option_data = array();
-
         		foreach ($product['option'] as $option) {
 					if ($option['type'] != 'file') {
 						$value = $option['option_value'];
@@ -210,7 +209,7 @@ class ControllerCheckoutCart extends Controller {
 						$value = $this->encryption->decrypt($option['option_value']);
 						$filename = 'download/' . $value;
 						$value = utf8_substr($value, 0, utf8_strrpos($value, '.'));
-						if ($option['option_id'] == 35) {
+						if ($value == 'CUSTOMISED.png') {
 						   $image = $filename;
 						}
 					}

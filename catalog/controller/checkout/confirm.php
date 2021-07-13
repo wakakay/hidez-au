@@ -349,7 +349,7 @@ class ControllerCheckoutConfirm extends Controller {
                        $value = $this->encryption->decrypt($option['option_value']);
                        $filename = 'download/' . $value;
                        $value = utf8_substr($value, 0, utf8_strrpos($value, '.'));
-                       if ($option['option_id'] == 35) {
+                       if ($value == 'CUSTOMISED.png') {
                           $image = $filename;
                        }
                     }

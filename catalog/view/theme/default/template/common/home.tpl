@@ -12,7 +12,6 @@
     <?php echo $content_top; ?>
   </div>
   <div id="rig"><?php echo $column_right; ?></div>
-  <div class="quine_tit"><h1>HIDEZ EQUINE SUITS SUITABLE FOR ALL FOLLOWING DISCIPLINES</h1></div>
   <div id="left"><?php echo $column_left; ?></div>
   <div id="bottom"><?php echo $content_bottom; ?></div>
 </div>

@@ -18,8 +18,21 @@ var initial = null;
 var startTouch = null;
 var successUploadImages = [];
 
+var categoryId = null;
+var dir = {
+  68: ['CHOOSE THE COLOR OR THE PATTERN OF THE SUIT FROM THE RIGHT', 'UPLOAD YOUR LOGOS AND MOVE THEM TO THE BARREL, NECK, OR RUMP'],
+  69: ['CHOOSE THE COLOR OR THE PATTERN OF THE SUIT FROM THE RIGHT', 'UPLOAD YOUR LOGOS AND MOVE THEM TO THE BARREL, NECK, OR RUMP'],
+  98: ['CHOOSE THE COLOR OR THE PATTERN OF THE HOOD  FROM THE RIGHT', 'UPLOAD YOUR LOGO AND MOVE IT TO THE CHEEK'],
+  106: ['CHOOSE THE COLOR OR THE PATTERN OF THE HOOD  FROM THE RIGHT', 'UPLOAD YOUR LOGO AND MOVE IT TO THE CHEEK'],
+};
+
 var getProduct = function (callback) {
   var productId = location.search.match(/(?<=product_id=)\d*/g)[0];
+  var path = location.search.match(/(?<=path=)\d*/g)[0];
+  if (path) {
+    categoryId = path.split('_')[0];
+  }
+
   if (!productId) {
     alert("product_id is null")
     return
@@ -54,6 +67,11 @@ var renderThumbs = function (dom) {
   }(i);
 
   $('.module-canvas .ui-list ul').html(HTML);
+  var ps = $('.module-canvas .ui-title p');
+  ps[0].innerHTML = '1. ' + dir[categoryId][0];
+  ps[1].innerHTML = '1. ' + dir[categoryId][1];
+
+
 
   getLoadThumb( data[0].thumb);
 };
@@ -63,7 +81,7 @@ var renderList = function (dom) {
   HTML += '<div class="ui-title">';
   HTML += '<h3>STEPS TO DESIGN :</h3>';
   HTML += '<p>1. CHOOSE THE COLOR OR THE PATTERN OF THE SUIT FROM THE RIGHT</p>';
-  HTML += '<p>2 UPLOAD YOUR LOGOS AND MOVE THEM TO THE BARREL, NECK, OR RUMP.</p>';
+  HTML += '<p>2. UPLOAD YOUR LOGOS AND MOVE THEM TO THE BARREL, NECK, OR RUMP</p>';
   HTML += '</div>';
   HTML += '<div class="ui-content" flex="main:justify">';
   HTML += '<div class="ui-canvas"><canvas id="canvas" width="' + ctxInfo.width + '" height="' + ctxInfo.height + '"></canvas></div>';

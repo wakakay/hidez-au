@@ -94,8 +94,7 @@
                             <li><a href="?route=information/information&information_id=48">Benefit Equine</a></li>
                             <li><a href="?route=information/information&information_id=49">Recommended Equine Use</a></li>
                             <li><a href="?route=information/information&information_id=50">Benefit Racing Greyhound</a></li>
-                            <li><a href="?route=information/information&information_id=51">Recommended Racing Greyhound Use</a>
-                            </li>
+                            <li><a href="?route=information/information&information_id=51">Recommended Racing Greyhound Use</a></li>
                             <li><a href="?route=information/information&information_id=52">Infrared Images</a></li>
                             <li><a href="?route=information/information&information_id=7" class="">Equine Faqs</a></li>
                             <li><a href="?route=information/information&information_id=33" class="">Canine Faqs</a></li>
@@ -142,8 +141,20 @@
                     </li>
                     <li><a href="javascript:void(0);" class="top">Gallery</a>
                         <ul>
-                            <li><a href="?route=information/information&information_id=13">Equine Gallery</a></li>
-                            <li><a href="?route=information/information&information_id=39">Canine Gallery</a></li>
+                            <!--<li><a href="?route=information/information&information_id=13">Equine Gallery</a></li>
+                            <li><a href="?route=information/information&information_id=39">Canine Gallery</a></li>-->
+                            <li>
+                                <a href="javascript:void(0);">Custom Products Exhibition</a>
+                                <ul>
+                                    <li><a href="?route=information/information&information_id=54">Custom Equine Suit</a></li>
+                                    <li><a href="?route=information/information&information_id=55">Custom Hood</a></li>
+                                    <li><a href="?route=information/information&information_id=56">Custom Socks</a></li>
+                                    <li><a href="?route=information/information&information_id=57">Custom Greyhound Suit</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="?route=information/information&information_id=58">Hidez Equine Suits Suitable for 12 Disciplines</a>
+                            </li>
                         </ul
                         >
                     </li>
